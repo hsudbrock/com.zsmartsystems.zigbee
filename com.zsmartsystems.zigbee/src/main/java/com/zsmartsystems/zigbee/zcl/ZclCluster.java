@@ -87,6 +87,15 @@ public abstract class ZclCluster {
     private boolean isClient = false;
 
     /**
+     * Indicates whether this is a manufacturer-specific cluster or not.
+     * <p>
+     * By the cluster library specification, manufacturer-specific clusters are those with a cluster identifier in the
+     * range 0xfc00-0xffff. I.e., in principle, the value of this flag could be determined from the cluster identifier,
+     * it is kept here as a separate attribute nevertheless.
+     */
+    private boolean isManufacturerSpecific = false;
+
+    /**
      * The list of supported attributes in the remote device for this cluster.
      * After initialisation, the list will contain an empty list. Once a successful call to
      * {@link #discoverAttributes()} has been made, the list will reflect the attributes supported by the remote device.
@@ -386,6 +395,24 @@ public abstract class ZclCluster {
      */
     public String getClusterName() {
         return clusterName;
+    }
+
+    /**
+     * Indicates whether this is a manufacturer-specific cluster or not.
+     *
+     * @return <code>true</code> iff the cluster is manufacturer-specific.
+     */
+    public boolean isManufacturerSpecific() {
+        return isManufacturerSpecific;
+    }
+
+    /**
+     * Sets whether this is a manufacturer-specific cluster.
+     *
+     * @param isManufacturerSpecific the new value indicating whether the cluster is manufacturer-specific
+     */
+    protected void setManufacturerSpecific(boolean isManufacturerSpecific) {
+        this.isManufacturerSpecific = isManufacturerSpecific;
     }
 
     /**
