@@ -6,74 +6,33 @@
  * http://www.eclipse.org/legal/epl-v10.html
  */
 package com.zsmartsystems.zigbee;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Generated;
-
 
 /**
- * ZigBee Profile Type value enumeration.
- * <p>
- * <p>
- * Code is auto-generated. Modifications may be overwritten!
+ * A ZigBee profile type.
+ *
+ * @author Henning Sudbrock - initial contribution, based on the ZigBeeProfileType enum from Chris Jackson
  */
-@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2018-08-29T17:17:08Z")
-public enum ZigBeeProfileType {
+public interface ZigBeeProfileType {
 
     /**
-     * ZigBee Home Automation
+     * @return the profile identifier of the application profile.
      */
-    ZIGBEE_HOME_AUTOMATION(0x0104),
+    int getProfileId();
 
     /**
-     * ZigBee Smart Energy
+     * Indicates whether this is a manufacturer-specific application profile.
+     * <p>
+     * According to the cluster library specification, a profile identifier in the range 0xc000-0xffff indicates
+     * a manufacturer-specific application profile. I.e., in principle, it could be determined by the profile ID whether
+     * the application profile is manufacturer-specific. This interface provides this method separately nevertheless.
+     *
+     * @return whether this is a manufacturer-specific application profile.
      */
-    ZIGBEE_SMART_ENERGY(0x0109),
+    boolean isManufacturerSpecific();
 
     /**
-     * ZigBee Green Power
+     * @return A textual description of the application profile.
      */
-    ZIGBEE_GREEN_POWER(0xA10E),
+    String getDescription();
 
-    /**
-     * Manufacturer Telegesis
-     */
-    MANUFACTURER_TELEGESIS(0xC059),
-
-    /**
-     * ZigBee Light Link
-     */
-    ZIGBEE_LIGHT_LINK(0xC05E),
-
-    /**
-     * Manufacturer Digi
-     */
-    MANUFACTURER_DIGI(0xC105);
-
-    /**
-     * A mapping between the integer code and its corresponding ZigBeeProfileType type to facilitate lookup by value.
-     */
-    private static Map<Integer, ZigBeeProfileType> idMap;
-
-    static {
-        idMap = new HashMap<Integer, ZigBeeProfileType>();
-        for (ZigBeeProfileType enumValue : values()) {
-            idMap.put(enumValue.key, enumValue);
-        }
-    }
-
-    private final int key;
-
-    private ZigBeeProfileType(final int key) {
-        this.key = key;
-    }
-
-    public int getKey() {
-        return key;
-    }
-
-    public static ZigBeeProfileType getByValue(final int value) {
-        return idMap.get(value);
-    }
 }

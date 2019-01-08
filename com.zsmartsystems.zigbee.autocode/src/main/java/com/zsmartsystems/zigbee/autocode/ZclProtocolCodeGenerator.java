@@ -512,7 +512,7 @@ public class ZclProtocolCodeGenerator {
 
     private static void generateZclProfileTypeEnumeration(Context context, String packageRootPrefix,
             File sourceRootPath) throws IOException {
-        final String className = "ZigBeeProfileType";
+        final String className = "StandardZigBeeProfileType";
 
         final String packageRoot = packageRootPrefix;
         final String packagePath = getPackagePath(sourceRootPath, "");
@@ -556,11 +556,11 @@ public class ZclProtocolCodeGenerator {
         out.println("    /**");
         out.println("     * Map containing the link of profile type value to the enum");
         out.println("     */");
-        out.println("    private static Map<Integer, ZigBeeProfileType> map = null;");
+        out.println("    private static Map<Integer, StandardZigBeeProfileType> map = null;");
         out.println();
 
         out.println("    static {");
-        out.println("        map = new HashMap<Integer, ZigBeeProfileType>();");
+        out.println("        map = new HashMap<Integer, StandardZigBeeProfileType>();");
         out.println("        for (" + className + " profileType : values()) {");
         out.println("            map.put(profileType.profileId, profileType);");
         out.println("        }");
@@ -625,6 +625,7 @@ public class ZclProtocolCodeGenerator {
         out.println("package " + packageRoot + ";");
         out.println();
         out.println("import " + packageRootPrefix + ".ZigBeeProfileType;");
+        out.println("import " + packageRootPrefix + ".StandardZigBeeProfileType;");
         out.println("import " + packageRootPrefix + packageZcl + ".ZclCluster;");
         out.println("import " + packageRootPrefix + packageZclCluster + ".*;");
         out.println();
@@ -648,7 +649,7 @@ public class ZclProtocolCodeGenerator {
                 }
                 first = false;
                 out.print("    " + cluster.clusterType + "(" + String.format("0x%04X", cluster.clusterId)
-                        + ", ZigBeeProfileType." + profile.profileType + ", Zcl" + cluster.nameUpperCamelCase
+                        + ", StandardZigBeeProfileType." + profile.profileType + ", Zcl" + cluster.nameUpperCamelCase
                         + "Cluster.class, \"" + cluster.clusterName + "\")");
             }
         }

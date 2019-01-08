@@ -15,7 +15,6 @@ import java.util.List;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.ZigBeeNetworkManager;
 import com.zsmartsystems.zigbee.ZigBeeNode;
-import com.zsmartsystems.zigbee.ZigBeeProfileType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
 import com.zsmartsystems.zigbee.zdo.field.NeighborTable;
 import com.zsmartsystems.zigbee.zdo.field.RoutingTable;
@@ -70,7 +69,7 @@ public class ZigBeeConsoleDescribeNodeCommand extends ZigBeeConsoleAbstractComma
         for (Integer endpointId : endpointIds) {
             ZigBeeEndpoint endpoint = node.getEndpoint(endpointId);
             out.print(String.format("            %-3d  : ", endpoint.getEndpointId()));
-            outputEndpoint(out, endpoint);
+            outputEndpoint(out, endpoint, networkManager);
         }
         out.println("Neighbors:");
         for (NeighborTable neighbor : node.getNeighbors()) {
@@ -82,9 +81,9 @@ public class ZigBeeConsoleDescribeNodeCommand extends ZigBeeConsoleAbstractComma
         }
     }
 
-    private void outputEndpoint(PrintStream out, ZigBeeEndpoint endpoint) {
+    private void outputEndpoint(PrintStream out, ZigBeeEndpoint endpoint, ZigBeeNetworkManager networkManager) {
         out.println("Profile     " + String.format("%04X ", endpoint.getProfileId())
-                + ZigBeeProfileType.getByValue(endpoint.getProfileId()));
+                + networkManager.getProfileTypeRegistry().getByProfileId(endpoint.getProfileId()));
         out.println("                 : Device Type " + String.format("%04X ", endpoint.getDeviceId())
                 + com.zsmartsystems.zigbee.ZigBeeDeviceType.getByValue(endpoint.getDeviceId()).toString());
         for (Integer clusterId : endpoint.getInputClusterIds()) {

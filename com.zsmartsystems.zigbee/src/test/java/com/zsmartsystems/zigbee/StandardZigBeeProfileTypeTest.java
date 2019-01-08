@@ -16,10 +16,11 @@ import org.junit.Test;
  * @author Chris Jackson
  *
  */
-public class ZigBeeProfileTypeTest {
+public class StandardZigBeeProfileTypeTest {
+
     @Test
     public void testTypes() {
-        assertEquals(ZigBeeProfileType.ZIGBEE_HOME_AUTOMATION, ZigBeeProfileType.getByValue(0x0104));
-        assertEquals(ZigBeeProfileType.ZIGBEE_LIGHT_LINK, ZigBeeProfileType.getByValue(0xC05E));
+        assertEquals(StandardZigBeeProfileType.ZIGBEE_HOME_AUTOMATION, StandardZigBeeProfileType.getByValue(0x0104));
+        assertEquals(StandardZigBeeProfileType.ZIGBEE_LIGHT_LINK, StandardZigBeeProfileType.getByValue(0xC05E));
     }
 }

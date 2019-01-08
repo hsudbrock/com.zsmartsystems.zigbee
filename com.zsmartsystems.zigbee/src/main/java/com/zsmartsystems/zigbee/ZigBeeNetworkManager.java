@@ -87,6 +87,8 @@ import com.zsmartsystems.zigbee.zdo.command.NetworkAddressRequest;
  * class
  * <li>Optionally set the {@link ZigBeeSerializer} and {@link ZigBeeDeserializer} using the {@link #setSerializer}
  * method
+ * <li>Optionally add manufacturer-specific profiles and/or clusters to the {@link ZigBeeProfileTypeRegistry} of the
+ * {@link ZigBeeNetworkManager}
  * <li>Call the {@link #initialize} method to perform the initial initialization of the ZigBee network
  * <li>Set the network configuration (see below).
  * <li>Call the {@link #startup} method to start using the configured ZigBee network. Configuration methods may not be
@@ -235,6 +237,11 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      */
     private int localNwkAddress = 0;
 
+    /**
+     * The registry for all profile types.
+     */
+    private ZigBeeProfileTypeRegistry profileTypeRegistry;
+
     public enum ZigBeeInitializeResponse {
         /**
          * Device is initialized successfully and is currently joined to a network
@@ -273,6 +280,8 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
         transport.setZigBeeTransportReceive(this);
 
         transactionManager = new ZigBeeTransactionManager(this);
+
+        profileTypeRegistry = new ZigBeeProfileTypeRegistry();
     }
 
     /**
@@ -292,7 +301,7 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      * Set the serializer class to be used to convert commands and fields into data to be sent to the dongle.
      * The system instantiates a new serializer for each command.
      *
-     * @param serializer the {@link ZigBeeSerializer} class
+     * @param serializer   the {@link ZigBeeSerializer} class
      * @param deserializer the {@link ZigBeeDeerializer} class
      */
     @SuppressWarnings("unchecked")
@@ -1472,5 +1481,9 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
     @Override
     public void receiveCommandStatus(int transactionId, ZigBeeTransportProgressState status) {
         transactionManager.receiveCommandStatus(transactionId, status);
+    }
+
+    public ZigBeeProfileTypeRegistry getProfileTypeRegistry() {
+        return profileTypeRegistry;
     }
 }
