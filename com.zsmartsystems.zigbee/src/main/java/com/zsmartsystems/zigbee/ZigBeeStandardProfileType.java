@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * Code is auto-generated. Modifications may be overwritten!
  */
 @Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2018-08-29T17:17:08Z")
-public enum StandardZigBeeProfileType implements ZigBeeProfileType {
+public enum ZigBeeStandardProfileType implements ZigBeeProfileType {
 
     /**
      * ZigBee Home Automation
@@ -54,18 +54,18 @@ public enum StandardZigBeeProfileType implements ZigBeeProfileType {
     /**
      * A mapping between the integer code and its corresponding ZigBeeProfileType type to facilitate lookup by value.
      */
-    private static Map<Integer, StandardZigBeeProfileType> idMap;
+    private static Map<Integer, ZigBeeStandardProfileType> idMap;
 
     static {
-        idMap = new HashMap<Integer, StandardZigBeeProfileType>();
-        for (StandardZigBeeProfileType enumValue : values()) {
+        idMap = new HashMap<Integer, ZigBeeStandardProfileType>();
+        for (ZigBeeStandardProfileType enumValue : values()) {
             idMap.put(enumValue.key, enumValue);
         }
     }
 
     private final int key;
 
-    private StandardZigBeeProfileType(final int key) {
+    private ZigBeeStandardProfileType(final int key) {
         this.key = key;
     }
 
@@ -73,7 +73,7 @@ public enum StandardZigBeeProfileType implements ZigBeeProfileType {
         return key;
     }
 
-    public static StandardZigBeeProfileType getByValue(final int value) {
+    public static ZigBeeStandardProfileType getByValue(final int value) {
         return idMap.get(value);
     }
 

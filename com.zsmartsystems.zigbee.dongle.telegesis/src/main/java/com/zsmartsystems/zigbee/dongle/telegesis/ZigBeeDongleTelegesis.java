@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import com.zsmartsystems.zigbee.ExtendedPanId;
 import com.zsmartsystems.zigbee.IeeeAddress;
-import com.zsmartsystems.zigbee.StandardZigBeeProfileType;
+import com.zsmartsystems.zigbee.ZigBeeStandardProfileType;
 import com.zsmartsystems.zigbee.ZigBeeApsFrame;
 import com.zsmartsystems.zigbee.ZigBeeBroadcastDestination;
 import com.zsmartsystems.zigbee.ZigBeeChannel;
@@ -589,7 +589,7 @@ public class ZigBeeDongleTelegesis
         // Set the profile to HA
         TelegesisSetRegisterCommand setRegister = new TelegesisSetRegisterCommand();
         setRegister.setRegister(0x48);
-        setRegister.setValue(StandardZigBeeProfileType.ZIGBEE_HOME_AUTOMATION.getKey());
+        setRegister.setValue(ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION.getKey());
         if (frameHandler.sendRequest(setRegister) == null) {
             logger.debug("Error setting Telegesis profile ID");
             return false;
