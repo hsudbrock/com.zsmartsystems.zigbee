@@ -7,12 +7,6 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-
-import javax.annotation.Generated;
-
 import com.zsmartsystems.zigbee.CommandResult;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.zcl.ZclAttribute;
@@ -26,6 +20,10 @@ import com.zsmartsystems.zigbee.zcl.clusters.alarms.ResetAlarmLogCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.alarms.ResetAllAlarmsCommand;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+import javax.annotation.Generated;
 
 /**
  * <b>Alarms</b> cluster implementation (<i>Cluster ID 0x0009</i>).
@@ -45,7 +43,7 @@ import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
  * <p>
  * Code is auto-generated. Modifications may be overwritten!
  */
-@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2018-10-24T19:40:52Z")
+@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2019-01-10T12:43:09Z")
 public class ZclAlarmsCluster extends ZclCluster {
     /**
      * The ZigBee Cluster Library Cluster ID
@@ -69,12 +67,10 @@ public class ZclAlarmsCluster extends ZclCluster {
     public static final int ATTR_ALARMCOUNT = 0x0000;
 
     // Attribute initialisation
-    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(1);
 
-        attributeMap.put(ATTR_ALARMCOUNT, new ZclAttribute(ZclStandardClusterType.ALARMS, ATTR_ALARMCOUNT, "AlarmCount",
-                ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ALARMCOUNT, new ZclAttribute(ZclStandardClusterType.ALARMS, ATTR_ALARMCOUNT, "AlarmCount", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
 
         return attributeMap;
     }

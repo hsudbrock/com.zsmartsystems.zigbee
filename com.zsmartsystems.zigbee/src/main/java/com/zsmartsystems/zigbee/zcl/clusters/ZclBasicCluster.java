@@ -7,12 +7,6 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-
-import javax.annotation.Generated;
-
 import com.zsmartsystems.zigbee.CommandResult;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.zcl.ZclAttribute;
@@ -21,13 +15,17 @@ import com.zsmartsystems.zigbee.zcl.ZclCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.basic.ResetToFactoryDefaultsCommand;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+import javax.annotation.Generated;
 
 /**
  * <b>Basic</b> cluster implementation (<i>Cluster ID 0x0000</i>).
  * <p>
  * Code is auto-generated. Modifications may be overwritten!
  */
-@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2018-10-24T19:40:52Z")
+@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2019-01-10T12:43:09Z")
 public class ZclBasicCluster extends ZclCluster {
     /**
      * The ZigBee Cluster Library Cluster ID
@@ -120,41 +118,23 @@ public class ZclBasicCluster extends ZclCluster {
     public static final int ATTR_SWBUILDID = 0x4000;
 
     // Attribute initialisation
-    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(14);
 
-        attributeMap.put(ATTR_ZCLVERSION, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_ZCLVERSION, "ZCLVersion",
-                ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
-        attributeMap.put(ATTR_APPLICATIONVERSION,
-                new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_APPLICATIONVERSION, "ApplicationVersion",
-                        ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
-        attributeMap.put(ATTR_STACKVERSION, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_STACKVERSION,
-                "StackVersion", ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
-        attributeMap.put(ATTR_HWVERSION, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_HWVERSION, "HWVersion",
-                ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
-        attributeMap.put(ATTR_MANUFACTURERNAME, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_MANUFACTURERNAME,
-                "ManufacturerName", ZclDataType.CHARACTER_STRING, true, true, false, false));
-        attributeMap.put(ATTR_MODELIDENTIFIER, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_MODELIDENTIFIER,
-                "ModelIdentifier", ZclDataType.CHARACTER_STRING, true, true, false, false));
-        attributeMap.put(ATTR_DATECODE, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_DATECODE, "DateCode",
-                ZclDataType.CHARACTER_STRING, true, true, false, false));
-        attributeMap.put(ATTR_POWERSOURCE, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_POWERSOURCE,
-                "PowerSource", ZclDataType.ENUMERATION_8_BIT, true, true, false, false));
-        attributeMap.put(ATTR_LOCATIONDESCRIPTION,
-                new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_LOCATIONDESCRIPTION, "LocationDescription",
-                        ZclDataType.CHARACTER_STRING, true, true, true, false));
-        attributeMap.put(ATTR_PHYSICALENVIRONMENT,
-                new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_PHYSICALENVIRONMENT, "PhysicalEnvironment",
-                        ZclDataType.ENUMERATION_8_BIT, true, true, true, false));
-        attributeMap.put(ATTR_DEVICEENABLED, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_DEVICEENABLED,
-                "DeviceEnabled", ZclDataType.BOOLEAN, true, true, true, false));
-        attributeMap.put(ATTR_ALARMMASK, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_ALARMMASK, "AlarmMask",
-                ZclDataType.BITMAP_8_BIT, true, true, true, false));
-        attributeMap.put(ATTR_DISABLELOCALCONFIG, new ZclAttribute(ZclStandardClusterType.BASIC,
-                ATTR_DISABLELOCALCONFIG, "DisableLocalConfig", ZclDataType.BITMAP_8_BIT, true, true, true, false));
-        attributeMap.put(ATTR_SWBUILDID, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_SWBUILDID, "SWBuildID",
-                ZclDataType.CHARACTER_STRING, false, true, false, false));
+        attributeMap.put(ATTR_ZCLVERSION, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_ZCLVERSION, "ZCLVersion", ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+        attributeMap.put(ATTR_APPLICATIONVERSION, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_APPLICATIONVERSION, "ApplicationVersion", ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+        attributeMap.put(ATTR_STACKVERSION, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_STACKVERSION, "StackVersion", ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+        attributeMap.put(ATTR_HWVERSION, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_HWVERSION, "HWVersion", ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, false, false));
+        attributeMap.put(ATTR_MANUFACTURERNAME, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_MANUFACTURERNAME, "ManufacturerName", ZclDataType.CHARACTER_STRING, true, true, false, false));
+        attributeMap.put(ATTR_MODELIDENTIFIER, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_MODELIDENTIFIER, "ModelIdentifier", ZclDataType.CHARACTER_STRING, true, true, false, false));
+        attributeMap.put(ATTR_DATECODE, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_DATECODE, "DateCode", ZclDataType.CHARACTER_STRING, true, true, false, false));
+        attributeMap.put(ATTR_POWERSOURCE, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_POWERSOURCE, "PowerSource", ZclDataType.ENUMERATION_8_BIT, true, true, false, false));
+        attributeMap.put(ATTR_LOCATIONDESCRIPTION, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_LOCATIONDESCRIPTION, "LocationDescription", ZclDataType.CHARACTER_STRING, true, true, true, false));
+        attributeMap.put(ATTR_PHYSICALENVIRONMENT, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_PHYSICALENVIRONMENT, "PhysicalEnvironment", ZclDataType.ENUMERATION_8_BIT, true, true, true, false));
+        attributeMap.put(ATTR_DEVICEENABLED, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_DEVICEENABLED, "DeviceEnabled", ZclDataType.BOOLEAN, true, true, true, false));
+        attributeMap.put(ATTR_ALARMMASK, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_ALARMMASK, "AlarmMask", ZclDataType.BITMAP_8_BIT, true, true, true, false));
+        attributeMap.put(ATTR_DISABLELOCALCONFIG, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_DISABLELOCALCONFIG, "DisableLocalConfig", ZclDataType.BITMAP_8_BIT, true, true, true, false));
+        attributeMap.put(ATTR_SWBUILDID, new ZclAttribute(ZclStandardClusterType.BASIC, ATTR_SWBUILDID, "SWBuildID", ZclDataType.CHARACTER_STRING, false, true, false, false));
 
         return attributeMap;
     }

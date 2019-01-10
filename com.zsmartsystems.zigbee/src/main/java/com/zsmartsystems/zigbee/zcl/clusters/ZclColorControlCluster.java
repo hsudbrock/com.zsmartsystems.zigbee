@@ -7,12 +7,6 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-
-import javax.annotation.Generated;
-
 import com.zsmartsystems.zigbee.CommandResult;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.zcl.ZclAttribute;
@@ -35,6 +29,10 @@ import com.zsmartsystems.zigbee.zcl.clusters.colorcontrol.StepHueCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.colorcontrol.StepSaturationCommand;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+import javax.annotation.Generated;
 
 /**
  * <b>Color Control</b> cluster implementation (<i>Cluster ID 0x0300</i>).
@@ -46,7 +44,7 @@ import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
  * <p>
  * Code is auto-generated. Modifications may be overwritten!
  */
-@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2018-10-24T19:40:52Z")
+@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2019-01-10T12:43:09Z")
 public class ZclColorControlCluster extends ZclCluster {
     /**
      * The ZigBee Cluster Library Cluster ID
@@ -204,57 +202,28 @@ public class ZclColorControlCluster extends ZclCluster {
     public static final int ATTR_COLORTEMPERATUREMAX = 0x400C;
 
     // Attribute initialisation
-    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(19);
 
-        attributeMap.put(ATTR_CURRENTHUE, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_CURRENTHUE,
-                "CurrentHue", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, true));
-        attributeMap.put(ATTR_CURRENTSATURATION,
-                new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_CURRENTSATURATION, "CurrentSaturation",
-                        ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, true));
-        attributeMap.put(ATTR_REMAININGTIME, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_REMAININGTIME,
-                "RemainingTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_CURRENTX, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_CURRENTX,
-                "CurrentX", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
-        attributeMap.put(ATTR_CURRENTY, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_CURRENTY,
-                "CurrentY", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
-        attributeMap.put(ATTR_DRIFTCOMPENSATION, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL,
-                ATTR_DRIFTCOMPENSATION, "DriftCompensation", ZclDataType.ENUMERATION_8_BIT, false, true, false, false));
-        attributeMap.put(ATTR_COMPENSATIONTEXT, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL,
-                ATTR_COMPENSATIONTEXT, "CompensationText", ZclDataType.CHARACTER_STRING, false, true, false, false));
-        attributeMap.put(ATTR_COLORTEMPERATURE,
-                new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORTEMPERATURE, "ColorTemperature",
-                        ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, true));
-        attributeMap.put(ATTR_COLORMODE, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORMODE,
-                "ColorMode", ZclDataType.ENUMERATION_8_BIT, false, true, false, false));
-        attributeMap.put(ATTR_ENHANCEDCURRENTHUE,
-                new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_ENHANCEDCURRENTHUE, "EnhancedCurrentHue",
-                        ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, true));
-        attributeMap.put(ATTR_ENHANCEDCOLORMODE, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL,
-                ATTR_ENHANCEDCOLORMODE, "EnhancedColorMode", ZclDataType.ENUMERATION_8_BIT, false, true, false, false));
-        attributeMap.put(ATTR_COLORLOOPACTIVE,
-                new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORLOOPACTIVE, "ColorLoopActive",
-                        ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_COLORLOOPDIRECTION,
-                new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORLOOPDIRECTION, "ColorLoopDirection",
-                        ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_COLORLOOPTIME, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORLOOPTIME,
-                "ColorLoopTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_COLORLOOPSTARTHUE,
-                new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORLOOPSTARTHUE, "ColorLoopStartHue",
-                        ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_COLORLOOPSTOREDHUE,
-                new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORLOOPSTOREDHUE, "ColorLoopStoredHue",
-                        ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_COLORCAPABILITIES, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL,
-                ATTR_COLORCAPABILITIES, "ColorCapabilities", ZclDataType.BITMAP_16_BIT, false, true, false, false));
-        attributeMap.put(ATTR_COLORTEMPERATUREMIN,
-                new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORTEMPERATUREMIN, "ColorTemperatureMin",
-                        ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_COLORTEMPERATUREMAX,
-                new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORTEMPERATUREMAX, "ColorTemperatureMax",
-                        ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_CURRENTHUE, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_CURRENTHUE, "CurrentHue", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, true));
+        attributeMap.put(ATTR_CURRENTSATURATION, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_CURRENTSATURATION, "CurrentSaturation", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, true));
+        attributeMap.put(ATTR_REMAININGTIME, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_REMAININGTIME, "RemainingTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_CURRENTX, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_CURRENTX, "CurrentX", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
+        attributeMap.put(ATTR_CURRENTY, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_CURRENTY, "CurrentY", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
+        attributeMap.put(ATTR_DRIFTCOMPENSATION, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_DRIFTCOMPENSATION, "DriftCompensation", ZclDataType.ENUMERATION_8_BIT, false, true, false, false));
+        attributeMap.put(ATTR_COMPENSATIONTEXT, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COMPENSATIONTEXT, "CompensationText", ZclDataType.CHARACTER_STRING, false, true, false, false));
+        attributeMap.put(ATTR_COLORTEMPERATURE, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORTEMPERATURE, "ColorTemperature", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, true));
+        attributeMap.put(ATTR_COLORMODE, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORMODE, "ColorMode", ZclDataType.ENUMERATION_8_BIT, false, true, false, false));
+        attributeMap.put(ATTR_ENHANCEDCURRENTHUE, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_ENHANCEDCURRENTHUE, "EnhancedCurrentHue", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, true));
+        attributeMap.put(ATTR_ENHANCEDCOLORMODE, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_ENHANCEDCOLORMODE, "EnhancedColorMode", ZclDataType.ENUMERATION_8_BIT, false, true, false, false));
+        attributeMap.put(ATTR_COLORLOOPACTIVE, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORLOOPACTIVE, "ColorLoopActive", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_COLORLOOPDIRECTION, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORLOOPDIRECTION, "ColorLoopDirection", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_COLORLOOPTIME, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORLOOPTIME, "ColorLoopTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_COLORLOOPSTARTHUE, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORLOOPSTARTHUE, "ColorLoopStartHue", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_COLORLOOPSTOREDHUE, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORLOOPSTOREDHUE, "ColorLoopStoredHue", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_COLORCAPABILITIES, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORCAPABILITIES, "ColorCapabilities", ZclDataType.BITMAP_16_BIT, false, true, false, false));
+        attributeMap.put(ATTR_COLORTEMPERATUREMIN, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORTEMPERATUREMIN, "ColorTemperatureMin", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_COLORTEMPERATUREMAX, new ZclAttribute(ZclStandardClusterType.COLOR_CONTROL, ATTR_COLORTEMPERATUREMAX, "ColorTemperatureMax", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
 
         return attributeMap;
     }

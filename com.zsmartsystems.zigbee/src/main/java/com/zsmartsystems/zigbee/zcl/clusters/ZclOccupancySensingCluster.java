@@ -7,18 +7,16 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-
-import javax.annotation.Generated;
-
 import com.zsmartsystems.zigbee.CommandResult;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.zcl.ZclAttribute;
 import com.zsmartsystems.zigbee.zcl.ZclCluster;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+import javax.annotation.Generated;
 
 /**
  * <b>Occupancy sensing</b> cluster implementation (<i>Cluster ID 0x0406</i>).
@@ -28,7 +26,7 @@ import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
  * <p>
  * Code is auto-generated. Modifications may be overwritten!
  */
-@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2018-10-24T19:40:52Z")
+@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2019-01-10T12:43:09Z")
 public class ZclOccupancySensingCluster extends ZclCluster {
     /**
      * The ZigBee Cluster Library Cluster ID
@@ -85,7 +83,6 @@ public class ZclOccupancySensingCluster extends ZclCluster {
     public static final int ATTR_ULTRASONICUNOCCUPIEDTOOCCUPIEDTHRESHOLD = 0x0022;
 
     // Attribute initialisation
-    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(7);
 

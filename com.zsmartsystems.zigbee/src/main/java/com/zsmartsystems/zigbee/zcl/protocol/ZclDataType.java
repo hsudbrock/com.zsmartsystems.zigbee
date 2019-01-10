@@ -26,7 +26,7 @@ import com.zsmartsystems.zigbee.ExtendedPanId;
  *
  * @author Chris Jackson
  */
-@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2018-10-24T19:39:59Z")
+@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2019-01-10T12:14:47Z")
 public enum ZclDataType {
     BITMAP_16_BIT("16-bit Bitmap", Integer.class, 0x19, false),
     BITMAP_32_BIT("32-bit Bitmap", Integer.class, 0x1B, false),
@@ -58,9 +58,7 @@ public enum ZclDataType {
     SIGNED_32_BIT_INTEGER("Signed 32-bit Integer", Integer.class, 0x2B, true),
     SIGNED_8_BIT_INTEGER("Signed 8-bit Integer", Integer.class, 0x28, true),
     UNSIGNED_16_BIT_INTEGER("Unsigned 16-bit integer", Integer.class, 0x21, true),
-    UNSIGNED_24_BIT_INTEGER("Unsigned 24-bit integer", Integer.class, 0x22, true),
     UNSIGNED_32_BIT_INTEGER("Unsigned 32-bit integer", Integer.class, 0x23, true),
-    UNSIGNED_48_BIT_INTEGER("Unsigned 48-bit integer", Long.class, 0x25, true),
     UNSIGNED_8_BIT_INTEGER("Unsigned 8-bit integer", Integer.class, 0x20, true),
     UTCTIME("UTCTime", Calendar.class, 0xE2, true),
     X_UNSIGNED_8_BIT_INTEGER("X Unsigned 8-bit integer", Integer.class, 0x00, false),

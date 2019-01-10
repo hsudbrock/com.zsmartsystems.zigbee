@@ -156,7 +156,7 @@ public class ZclProtocolCodeGenerator {
      * The main method for running the code generator.
      *
      * @param args
-     *            the command line arguments
+     *                 the command line arguments
      */
     public static void main(final String[] args) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
@@ -512,7 +512,7 @@ public class ZclProtocolCodeGenerator {
 
     private static void generateZclProfileTypeEnumeration(Context context, String packageRootPrefix,
             File sourceRootPath) throws IOException {
-        final String className = "StandardZigBeeProfileType";
+        final String className = "ZigBeeStandardProfileType";
 
         final String packageRoot = packageRootPrefix;
         final String packagePath = getPackagePath(sourceRootPath, "");
@@ -532,7 +532,7 @@ public class ZclProtocolCodeGenerator {
         out.println();
         outputClassJavaDoc(out, "Enumeration of ZigBee profile types");
         outputClassGenerated(out);
-        out.println("public enum " + className + " {");
+        out.println("public enum " + className + " implements ZigBeeProfileType {");
 
         out.println("    UNKNOWN(-1, \"Unknown Profile\"),");
         final LinkedList<Profile> profiles = new LinkedList<Profile>(context.profiles.values());
@@ -556,11 +556,11 @@ public class ZclProtocolCodeGenerator {
         out.println("    /**");
         out.println("     * Map containing the link of profile type value to the enum");
         out.println("     */");
-        out.println("    private static Map<Integer, StandardZigBeeProfileType> map = null;");
+        out.println("    private static Map<Integer, ZigBeeStandardProfileType> map = null;");
         out.println();
 
         out.println("    static {");
-        out.println("        map = new HashMap<Integer, StandardZigBeeProfileType>();");
+        out.println("        map = new HashMap<Integer, ZigBeeStandardProfileType>();");
         out.println("        for (" + className + " profileType : values()) {");
         out.println("            map.put(profileType.profileId, profileType);");
         out.println("        }");
@@ -603,7 +603,22 @@ public class ZclProtocolCodeGenerator {
         out.println("        }");
         out.println("        return map.get(profileTypeValue);");
         out.println("    }");
-
+        out.println();
+        out.println("    @Override");
+        out.println("    public int getProfileId() {");
+        out.println("        return profileId;");
+        out.println("    }");
+        out.println();
+        out.println("    @Override");
+        out.println("    public boolean isManufacturerSpecific() {");
+        out.println("        return false;");
+        out.println("    }");
+        out.println();
+        out.println("    @Override");
+        out.println("    public String getDescription() {");
+        out.println("        return this.toString();");
+        out.println("    }");
+        out.println();
         out.println("}");
 
         out.flush();
@@ -612,7 +627,7 @@ public class ZclProtocolCodeGenerator {
 
     private static void generateZclClusterTypeEnumeration(Context context, String packageRootPrefix,
             File sourceRootPath) throws IOException {
-        final String className = "ZclClusterType";
+        final String className = "ZclStandardClusterType";
 
         final String packageRoot = packageRootPrefix + packageZclProtocol;
         final String packagePath = getPackagePath(sourceRootPath, packageZclProtocol);
@@ -625,7 +640,7 @@ public class ZclProtocolCodeGenerator {
         out.println("package " + packageRoot + ";");
         out.println();
         out.println("import " + packageRootPrefix + ".ZigBeeProfileType;");
-        out.println("import " + packageRootPrefix + ".StandardZigBeeProfileType;");
+        out.println("import " + packageRootPrefix + ".ZigBeeStandardProfileType;");
         out.println("import " + packageRootPrefix + packageZcl + ".ZclCluster;");
         out.println("import " + packageRootPrefix + packageZclCluster + ".*;");
         out.println();
@@ -637,7 +652,7 @@ public class ZclProtocolCodeGenerator {
         out.println();
         outputClassJavaDoc(out, "Enumeration of ZigBee Clusters");
         outputClassGenerated(out);
-        out.println("public enum " + className + " {");
+        out.println("public enum " + className + " implements ZclClusterType {");
 
         boolean first = true;
         final LinkedList<Profile> profiles = new LinkedList<Profile>(context.profiles.values());
@@ -649,7 +664,7 @@ public class ZclProtocolCodeGenerator {
                 }
                 first = false;
                 out.print("    " + cluster.clusterType + "(" + String.format("0x%04X", cluster.clusterId)
-                        + ", StandardZigBeeProfileType." + profile.profileType + ", Zcl" + cluster.nameUpperCamelCase
+                        + ", ZigBeeStandardProfileType." + profile.profileType + ", Zcl" + cluster.nameUpperCamelCase
                         + "Cluster.class, \"" + cluster.clusterName + "\")");
             }
         }
@@ -657,7 +672,7 @@ public class ZclProtocolCodeGenerator {
 
         out.println();
         out.println(
-                "    private static final Map<Integer, ZclClusterType> idValueMap = new HashMap<Integer, ZclClusterType>();");
+                "    private static final Map<Integer, ZclStandardClusterType> idValueMap = new HashMap<Integer, ZclStandardClusterType>();");
         out.println();
         out.println("    private final int clusterId;");
         out.println("    private final ZigBeeProfileType profileType;");
@@ -673,11 +688,12 @@ public class ZclProtocolCodeGenerator {
         out.println("    }");
         out.println();
         out.println("    static {");
-        out.println("        for (final ZclClusterType value : values()) {");
+        out.println("        for (final ZclStandardClusterType value : values()) {");
         out.println("            idValueMap.put(value.clusterId, value);");
         out.println("        }");
         out.println("    }");
         out.println();
+        out.println("    @Override");
         out.println("    public int getId() {");
         out.println("        return clusterId;");
         out.println("    }");
@@ -698,7 +714,7 @@ public class ZclProtocolCodeGenerator {
         out.println("        return clusterClass;");
         out.println("    }");
         out.println();
-        out.println("    public static ZclClusterType getValueById(final int clusterId) {");
+        out.println("    public static ZclStandardClusterType getValueById(final int clusterId) {");
         out.println("        return idValueMap.get(clusterId);");
         out.println("    }");
         out.println();
@@ -734,16 +750,18 @@ public class ZclProtocolCodeGenerator {
                     final LinkedList<Command> commands = new LinkedList<Command>(cluster.received.values());
                     for (final Command command : commands) {
                         final boolean generic = cluster.clusterId == 65535;
-                        valueRows.add("    " + command.commandType + "(" + command.commandId + ", ZclClusterType."
-                                + cluster.clusterType + ", \"" + command.commandLabel + "\", true, " + generic + ")");
+                        valueRows.add("    " + command.commandType + "(" + command.commandId
+                                + ", ZclStandardClusterType." + cluster.clusterType + ", \"" + command.commandLabel
+                                + "\", true, " + generic + ")");
                     }
                 }
                 {
                     final LinkedList<Command> commands = new LinkedList<Command>(cluster.generated.values());
                     for (final Command command : commands) {
                         final boolean generic = cluster.clusterId == 65535;
-                        valueRows.add("    " + command.commandType + "(" + command.commandId + ", ZclClusterType."
-                                + cluster.clusterType + ", \"" + command.commandLabel + "\", false, " + generic + ")");
+                        valueRows.add("    " + command.commandType + "(" + command.commandId
+                                + ", ZclStandardClusterType." + cluster.clusterType + ", \"" + command.commandLabel
+                                + "\", false, " + generic + ")");
                     }
                 }
             }
@@ -1613,7 +1631,7 @@ public class ZclProtocolCodeGenerator {
                 }
 
                 if (!cluster.attributes.isEmpty()) {
-                    imports.add(packageRoot + packageZclProtocol + ".ZclClusterType");
+                    imports.add(packageRoot + packageZclProtocol + ".ZclStandardClusterType");
                 }
 
                 List<String> importList = new ArrayList<String>();
@@ -1674,9 +1692,10 @@ public class ZclProtocolCodeGenerator {
                     out.println();
                     for (final Attribute attribute : cluster.attributes.values()) {
                         out.println("        attributeMap.put(" + attribute.enumName
-                                + ", new ZclAttribute(ZclClusterType." + cluster.clusterType + ", " + attribute.enumName
-                                + ", \"" + attribute.attributeLabel + "\", " + "ZclDataType." + attribute.dataType
-                                + ", " + "mandatory".equals(attribute.attributeImplementation.toLowerCase()) + ", "
+                                + ", new ZclAttribute(ZclStandardClusterType." + cluster.clusterType + ", "
+                                + attribute.enumName + ", \"" + attribute.attributeLabel + "\", " + "ZclDataType."
+                                + attribute.dataType + ", "
+                                + "mandatory".equals(attribute.attributeImplementation.toLowerCase()) + ", "
                                 + attribute.attributeAccess.toLowerCase().contains("read") + ", "
                                 + attribute.attributeAccess.toLowerCase().contains("write") + ", "
                                 + "mandatory".equals(attribute.attributeReporting.toLowerCase()) + "));");

@@ -7,18 +7,16 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-
-import javax.annotation.Generated;
-
 import com.zsmartsystems.zigbee.CommandResult;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.zcl.ZclAttribute;
 import com.zsmartsystems.zigbee.zcl.ZclCluster;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+import javax.annotation.Generated;
 
 /**
  * <b>Electrical Measurement</b> cluster implementation (<i>Cluster ID 0x0B04</i>).
@@ -36,7 +34,7 @@ import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
  * <p>
  * Code is auto-generated. Modifications may be overwritten!
  */
-@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2018-10-24T19:40:52Z")
+@Generated(value = "com.zsmartsystems.zigbee.autocode.ZclProtocolCodeGenerator", date = "2019-01-10T12:43:09Z")
 public class ZclElectricalMeasurementCluster extends ZclCluster {
     /**
      * The ZigBee Cluster Library Cluster ID
@@ -126,46 +124,23 @@ public class ZclElectricalMeasurementCluster extends ZclCluster {
     public static final int ATTR_ACPOWERDIVISOR = 0x0605;
 
     // Attribute initialisation
-    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(14);
 
-        attributeMap.put(ATTR_MEASUREMENTTYPE, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT,
-                ATTR_MEASUREMENTTYPE, "MeasurementType", ZclDataType.BITMAP_32_BIT, true, true, false, false));
-        attributeMap.put(ATTR_ACFREQUENCY, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT,
-                ATTR_ACFREQUENCY, "ACFrequency", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_TOTALACTIVEPOWER,
-                new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_TOTALACTIVEPOWER,
-                        "TotalActivePower", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_TOTALREACTIVEPOWER,
-                new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_TOTALREACTIVEPOWER,
-                        "TotalReactivePower", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_TOTALAPPARENTPOWER,
-                new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_TOTALAPPARENTPOWER,
-                        "TotalApparentPower", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_RMSVOLTAGE, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT,
-                ATTR_RMSVOLTAGE, "RMSVoltage", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_RMSCURRENT, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT,
-                ATTR_RMSCURRENT, "RMSCurrent", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_ACTIVEPOWER, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT,
-                ATTR_ACTIVEPOWER, "ActivePower", ZclDataType.SIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_ACVOLTAGEMULTIPLIER,
-                new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACVOLTAGEMULTIPLIER,
-                        "ACVoltageMultiplier", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_ACVOLTAGEDIVISOR,
-                new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACVOLTAGEDIVISOR,
-                        "ACVoltageDivisor", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_ACCURRENTMULTIPLIER,
-                new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACCURRENTMULTIPLIER,
-                        "ACCurrentMultiplier", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_ACCURRENTDIVISOR,
-                new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACCURRENTDIVISOR,
-                        "ACCurrentDivisor", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_ACPOWERMULTIPLIER,
-                new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACPOWERMULTIPLIER,
-                        "ACPowerMultiplier", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_ACPOWERDIVISOR, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT,
-                ATTR_ACPOWERDIVISOR, "ACPowerDivisor", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_MEASUREMENTTYPE, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_MEASUREMENTTYPE, "MeasurementType", ZclDataType.BITMAP_32_BIT, true, true, false, false));
+        attributeMap.put(ATTR_ACFREQUENCY, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACFREQUENCY, "ACFrequency", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_TOTALACTIVEPOWER, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_TOTALACTIVEPOWER, "TotalActivePower", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_TOTALREACTIVEPOWER, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_TOTALREACTIVEPOWER, "TotalReactivePower", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_TOTALAPPARENTPOWER, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_TOTALAPPARENTPOWER, "TotalApparentPower", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_RMSVOLTAGE, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_RMSVOLTAGE, "RMSVoltage", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_RMSCURRENT, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_RMSCURRENT, "RMSCurrent", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ACTIVEPOWER, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACTIVEPOWER, "ActivePower", ZclDataType.SIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ACVOLTAGEMULTIPLIER, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACVOLTAGEMULTIPLIER, "ACVoltageMultiplier", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ACVOLTAGEDIVISOR, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACVOLTAGEDIVISOR, "ACVoltageDivisor", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ACCURRENTMULTIPLIER, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACCURRENTMULTIPLIER, "ACCurrentMultiplier", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ACCURRENTDIVISOR, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACCURRENTDIVISOR, "ACCurrentDivisor", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ACPOWERMULTIPLIER, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACPOWERMULTIPLIER, "ACPowerMultiplier", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ACPOWERDIVISOR, new ZclAttribute(ZclStandardClusterType.ELECTRICAL_MEASUREMENT, ATTR_ACPOWERDIVISOR, "ACPowerDivisor", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
 
         return attributeMap;
     }
