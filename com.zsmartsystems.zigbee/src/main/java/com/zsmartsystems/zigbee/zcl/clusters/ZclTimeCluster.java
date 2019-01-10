@@ -7,17 +7,19 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
-import com.zsmartsystems.zigbee.CommandResult;
-import com.zsmartsystems.zigbee.ZigBeeEndpoint;
-import com.zsmartsystems.zigbee.zcl.ZclAttribute;
-import com.zsmartsystems.zigbee.zcl.ZclCluster;
-import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
-import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+
 import javax.annotation.Generated;
+
+import com.zsmartsystems.zigbee.CommandResult;
+import com.zsmartsystems.zigbee.ZigBeeEndpoint;
+import com.zsmartsystems.zigbee.zcl.ZclAttribute;
+import com.zsmartsystems.zigbee.zcl.ZclCluster;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
 
 /**
  * <b>Time</b> cluster implementation (<i>Cluster ID 0x000A</i>).
@@ -104,17 +106,18 @@ public class ZclTimeCluster extends ZclCluster {
     public static final int ATTR_LOCALTIME = 0x0007;
 
     // Attribute initialisation
+    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(8);
 
-        attributeMap.put(ATTR_TIME, new ZclAttribute(ZclClusterType.TIME, ATTR_TIME, "Time", ZclDataType.UTCTIME, true, true, true, false));
-        attributeMap.put(ATTR_TIMESTATUS, new ZclAttribute(ZclClusterType.TIME, ATTR_TIMESTATUS, "TimeStatus", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
-        attributeMap.put(ATTR_TIMEZONE, new ZclAttribute(ZclClusterType.TIME, ATTR_TIMEZONE, "TimeZone", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, true, false));
-        attributeMap.put(ATTR_DSTSTART, new ZclAttribute(ZclClusterType.TIME, ATTR_DSTSTART, "DstStart", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, true, false));
-        attributeMap.put(ATTR_DSTEND, new ZclAttribute(ZclClusterType.TIME, ATTR_DSTEND, "DstEnd", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, true, false));
-        attributeMap.put(ATTR_DSTSHIFT, new ZclAttribute(ZclClusterType.TIME, ATTR_DSTSHIFT, "DstShift", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, true, false));
-        attributeMap.put(ATTR_STANDARDTIME, new ZclAttribute(ZclClusterType.TIME, ATTR_STANDARDTIME, "StandardTime", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_LOCALTIME, new ZclAttribute(ZclClusterType.TIME, ATTR_LOCALTIME, "LocalTime", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_TIME, new ZclAttribute(ZclStandardClusterType.TIME, ATTR_TIME, "Time", ZclDataType.UTCTIME, true, true, true, false));
+        attributeMap.put(ATTR_TIMESTATUS, new ZclAttribute(ZclStandardClusterType.TIME, ATTR_TIMESTATUS, "TimeStatus", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_TIMEZONE, new ZclAttribute(ZclStandardClusterType.TIME, ATTR_TIMEZONE, "TimeZone", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_DSTSTART, new ZclAttribute(ZclStandardClusterType.TIME, ATTR_DSTSTART, "DstStart", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_DSTEND, new ZclAttribute(ZclStandardClusterType.TIME, ATTR_DSTEND, "DstEnd", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_DSTSHIFT, new ZclAttribute(ZclStandardClusterType.TIME, ATTR_DSTSHIFT, "DstShift", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_STANDARDTIME, new ZclAttribute(ZclStandardClusterType.TIME, ATTR_STANDARDTIME, "StandardTime", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_LOCALTIME, new ZclAttribute(ZclStandardClusterType.TIME, ATTR_LOCALTIME, "LocalTime", ZclDataType.SIGNED_32_BIT_INTEGER, false, true, false, false));
 
         return attributeMap;
     }

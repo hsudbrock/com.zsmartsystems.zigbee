@@ -55,6 +55,7 @@ import com.zsmartsystems.zigbee.zcl.ZclFieldSerializer;
 import com.zsmartsystems.zigbee.zcl.ZclFrameType;
 import com.zsmartsystems.zigbee.zcl.ZclHeader;
 import com.zsmartsystems.zigbee.zcl.ZclTransactionMatcher;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterTypeRegistry;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclCommandType;
 import com.zsmartsystems.zigbee.zdo.ZdoCommand;
 import com.zsmartsystems.zigbee.zdo.ZdoCommandType;
@@ -242,6 +243,11 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      */
     private ZigBeeProfileTypeRegistry profileTypeRegistry;
 
+    /**
+     * The registry for all cluster types.
+     */
+    private ZclClusterTypeRegistry clusterTypeRegistry;
+
     public enum ZigBeeInitializeResponse {
         /**
          * Device is initialized successfully and is currently joined to a network
@@ -282,6 +288,7 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
         transactionManager = new ZigBeeTransactionManager(this);
 
         profileTypeRegistry = new ZigBeeProfileTypeRegistry();
+        clusterTypeRegistry = new ZclClusterTypeRegistry();
     }
 
     /**
@@ -514,7 +521,7 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      * <p>
      *
      * @param reinitialize true if the provider is to reinitialise the network with the parameters configured since the
-     *            {@link #initialize} method was called.
+     *                         {@link #initialize} method was called.
      * @return {@link ZigBeeStatus} with the status of function
      */
     public ZigBeeStatus startup(boolean reinitialize) {
@@ -566,7 +573,7 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      * Schedules a runnable task for execution. This uses a fixed size scheduler to limit thread execution.
      *
      * @param runnableTask the {@link Runnable} to execute
-     * @param delay the delay in milliseconds before the task will be executed
+     * @param delay        the delay in milliseconds before the task will be executed
      * @return the {@link ScheduledFuture} for the scheduled task
      */
     public ScheduledFuture<?> scheduleTask(Runnable runnableTask, long delay) {
@@ -580,9 +587,9 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      * Stops the current execution of a task and schedules a runnable task for execution again.
      * This uses a fixed size scheduler to limit thread execution.
      *
-     * @param futureTask the {@link ScheduledFuture} for the current scheduled task
+     * @param futureTask   the {@link ScheduledFuture} for the current scheduled task
      * @param runnableTask the {@link Runnable} to execute
-     * @param delay the delay in milliseconds before the task will be executed
+     * @param delay        the delay in milliseconds before the task will be executed
      * @return the {@link ScheduledFuture} for the scheduled task
      */
     public ScheduledFuture<?> rescheduleTask(ScheduledFuture<?> futureTask, Runnable runnableTask, long delay) {
@@ -600,7 +607,7 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      *
      * @param runnableTask the {@link Runnable} to execute
      * @param initialDelay the delay in milliseconds before the task will be executed
-     * @param period the period in milliseconds between each subsequent execution
+     * @param period       the period in milliseconds between each subsequent execution
      * @return the {@link ScheduledFuture} for the scheduled task
      */
     public ScheduledFuture<?> scheduleTask(Runnable runnableTask, long initialDelay, long period) {
@@ -1015,7 +1022,7 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      * Sends {@link ZclCommand} command to {@link ZigBeeAddress}.
      *
      * @param destination the destination
-     * @param command the {@link ZclCommand}
+     * @param command     the {@link ZclCommand}
      * @return the command result future
      */
     public Future<CommandResult> send(ZigBeeAddress destination, ZclCommand command) {
@@ -1052,7 +1059,7 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      * since it allows devices to join the network without the installer knowing.
      *
      * @param duration sets the duration of the join enable. Setting this to 0 disables joining. As per ZigBee 3, a
-     *            value of 255 is not permitted and will be ignored.
+     *                     value of 255 is not permitted and will be ignored.
      * @return {@link ZigBeeStatus} with the status of function
      */
     public ZigBeeStatus permitJoin(final int duration) {
@@ -1067,8 +1074,8 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      * since it allows devices to join the network without the installer knowing.
      *
      * @param destination the {@link ZigBeeEndpointAddress} to send the join request to
-     * @param duration sets the duration of the join enable. Setting this to 0 disables joining. As per ZigBee 3, a
-     *            value of 255 is not permitted and will be ignored.
+     * @param duration    sets the duration of the join enable. Setting this to 0 disables joining. As per ZigBee 3, a
+     *                        value of 255 is not permitted and will be ignored.
      * @return {@link ZigBeeStatus} with the status of function
      */
     public ZigBeeStatus permitJoin(final ZigBeeEndpointAddress destination, final int duration) {
@@ -1105,8 +1112,8 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      * Sends a ZDO Leave Request to a device requesting that an end device leave the network.
      *
      * @param destinationAddress the network address to send the request to - this is the device parent or the the
-     *            device we want to leave.
-     * @param leaveAddress the {@link IeeeAddress} of the end device we want to leave the network
+     *                               device we want to leave.
+     * @param leaveAddress       the {@link IeeeAddress} of the end device we want to leave the network
      */
     public void leave(final Integer destinationAddress, final IeeeAddress leaveAddress) {
         final ManagementLeaveRequest command = new ManagementLeaveRequest();
@@ -1426,7 +1433,7 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
     /**
      * Gets a functional extension that has been registered with the network.
      *
-     * @param <T> {@link ZigBeeNetworkExtension}
+     * @param                    <T> {@link ZigBeeNetworkExtension}
      * @param requestedExtension the {@link ZigBeeNetworkExtension} to get
      * @return the requested {@link ZigBeeNetworkExtension} if it exists, or null
      */
@@ -1485,5 +1492,9 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
 
     public ZigBeeProfileTypeRegistry getProfileTypeRegistry() {
         return profileTypeRegistry;
+    }
+
+    public ZclClusterTypeRegistry getClusterTypeRegistry() {
+        return clusterTypeRegistry;
     }
 }

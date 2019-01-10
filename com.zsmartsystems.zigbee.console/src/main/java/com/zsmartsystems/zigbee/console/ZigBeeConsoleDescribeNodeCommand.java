@@ -15,7 +15,6 @@ import java.util.List;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.ZigBeeNetworkManager;
 import com.zsmartsystems.zigbee.ZigBeeNode;
-import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
 import com.zsmartsystems.zigbee.zdo.field.NeighborTable;
 import com.zsmartsystems.zigbee.zdo.field.RoutingTable;
 
@@ -87,10 +86,10 @@ public class ZigBeeConsoleDescribeNodeCommand extends ZigBeeConsoleAbstractComma
         out.println("                 : Device Type " + String.format("%04X ", endpoint.getDeviceId())
                 + com.zsmartsystems.zigbee.ZigBeeDeviceType.getByValue(endpoint.getDeviceId()).toString());
         for (Integer clusterId : endpoint.getInputClusterIds()) {
-            out.println("                   -> " + ZclClusterType.getValueById(clusterId));
+            out.println("                   -> " + networkManager.getClusterTypeRegistry().getByClusterId(clusterId));
         }
         for (Integer clusterId : endpoint.getOutputClusterIds()) {
-            out.println("                   <- " + ZclClusterType.getValueById(clusterId));
+            out.println("                   <- " + networkManager.getClusterTypeRegistry().getByClusterId(clusterId));
         }
     }
 }

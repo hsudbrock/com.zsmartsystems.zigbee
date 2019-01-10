@@ -7,6 +7,12 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+
+import javax.annotation.Generated;
+
 import com.zsmartsystems.zigbee.CommandResult;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.zcl.ZclAttribute;
@@ -15,12 +21,8 @@ import com.zsmartsystems.zigbee.zcl.ZclCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.identify.IdentifyCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.identify.IdentifyQueryCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.identify.IdentifyQueryResponse;
-import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-import javax.annotation.Generated;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
 
 /**
  * <b>Identify</b> cluster implementation (<i>Cluster ID 0x0003</i>).
@@ -63,10 +65,11 @@ public class ZclIdentifyCluster extends ZclCluster {
     public static final int ATTR_IDENTIFYTIME = 0x0000;
 
     // Attribute initialisation
+    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(1);
 
-        attributeMap.put(ATTR_IDENTIFYTIME, new ZclAttribute(ZclClusterType.IDENTIFY, ATTR_IDENTIFYTIME, "IdentifyTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, true, false));
+        attributeMap.put(ATTR_IDENTIFYTIME, new ZclAttribute(ZclStandardClusterType.IDENTIFY, ATTR_IDENTIFYTIME, "IdentifyTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, true, false));
 
         return attributeMap;
     }

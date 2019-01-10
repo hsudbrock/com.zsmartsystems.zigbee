@@ -7,6 +7,12 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+
+import javax.annotation.Generated;
+
 import com.zsmartsystems.zigbee.CommandResult;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.zcl.ZclAttribute;
@@ -17,12 +23,8 @@ import com.zsmartsystems.zigbee.zcl.clusters.pollcontrol.CheckInResponse;
 import com.zsmartsystems.zigbee.zcl.clusters.pollcontrol.FastPollStopCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.pollcontrol.SetLongPollIntervalCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.pollcontrol.SetShortPollIntervalCommand;
-import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-import javax.annotation.Generated;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
 
 /**
  * <b>Poll Control</b> cluster implementation (<i>Cluster ID 0x0020</i>).
@@ -84,7 +86,7 @@ public class ZclPollControlCluster extends ZclCluster {
     public static final int ATTR_SHORTPOLLINTERVAL = 0x0002;
     /**
      * The FastPollTimeout attribute represents the number of quarterseconds that an end device will stay in fast poll mode by default. It is
-     * suggested that the FastPollTimeoutattribute value be greater than 7.68 seconds.The Poll Control Cluster  Client MAYoverride  this  value 
+     * suggested that the FastPollTimeoutattribute value be greater than 7.68 seconds.The Poll Control Cluster  Client MAYoverride  this  value
      * by  indicating  a  different  value  in  the  Fast  Poll Duration argument in the Check-in Response command. If the Client writes a value out of range
      * or greater  than  the  optional FastPollTimeoutMax attribute  value  if  supported, the Server SHOULD return a  Write  Attributes  Response with a
      * status of  INVALID_VALUE30.  An  end  device  that implements the  Poll Control server can be  put into a  fast poll  mode during  which it will send MAC
@@ -99,7 +101,7 @@ public class ZclPollControlCluster extends ZclCluster {
      */
     public static final int ATTR_CHECKININTERVALMIN = 0x0004;
     /**
-     * The Poll Control Server MAYoptionally provide its own minimum value for the LongPollIntervalto protect against  another  device  setting 
+     * The Poll Control Server MAYoptionally provide its own minimum value for the LongPollIntervalto protect against  another  device  setting
      * the  value  to  too  short  a  time  resulting  in  an  inadvertent  power  drain  on  the device.
      */
     public static final int ATTR_LONGPOLLINTERVALMIN = 0x0005;
@@ -110,16 +112,17 @@ public class ZclPollControlCluster extends ZclCluster {
     public static final int ATTR_FASTPOLLTIMEOUTMIN = 0x0006;
 
     // Attribute initialisation
+    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(7);
 
-        attributeMap.put(ATTR_CHECKININTERVAL, new ZclAttribute(ZclClusterType.POLL_CONTROL, ATTR_CHECKININTERVAL, "CheckinInterval", ZclDataType.UNSIGNED_32_BIT_INTEGER, true, true, true, true));
-        attributeMap.put(ATTR_LONGPOLLINTERVAL, new ZclAttribute(ZclClusterType.POLL_CONTROL, ATTR_LONGPOLLINTERVAL, "LongPollInterval", ZclDataType.UNSIGNED_32_BIT_INTEGER, true, true, false, true));
-        attributeMap.put(ATTR_SHORTPOLLINTERVAL, new ZclAttribute(ZclClusterType.POLL_CONTROL, ATTR_SHORTPOLLINTERVAL, "ShortPollInterval", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
-        attributeMap.put(ATTR_FASTPOLLTIMEOUT, new ZclAttribute(ZclClusterType.POLL_CONTROL, ATTR_FASTPOLLTIMEOUT, "FastPollTimeout", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
-        attributeMap.put(ATTR_CHECKININTERVALMIN, new ZclAttribute(ZclClusterType.POLL_CONTROL, ATTR_CHECKININTERVALMIN, "CheckinIntervalMin", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_LONGPOLLINTERVALMIN, new ZclAttribute(ZclClusterType.POLL_CONTROL, ATTR_LONGPOLLINTERVALMIN, "LongPollIntervalMin", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_FASTPOLLTIMEOUTMIN, new ZclAttribute(ZclClusterType.POLL_CONTROL, ATTR_FASTPOLLTIMEOUTMIN, "FastPollTimeoutMin", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_CHECKININTERVAL, new ZclAttribute(ZclStandardClusterType.POLL_CONTROL, ATTR_CHECKININTERVAL, "CheckinInterval", ZclDataType.UNSIGNED_32_BIT_INTEGER, true, true, true, true));
+        attributeMap.put(ATTR_LONGPOLLINTERVAL, new ZclAttribute(ZclStandardClusterType.POLL_CONTROL, ATTR_LONGPOLLINTERVAL, "LongPollInterval", ZclDataType.UNSIGNED_32_BIT_INTEGER, true, true, false, true));
+        attributeMap.put(ATTR_SHORTPOLLINTERVAL, new ZclAttribute(ZclStandardClusterType.POLL_CONTROL, ATTR_SHORTPOLLINTERVAL, "ShortPollInterval", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
+        attributeMap.put(ATTR_FASTPOLLTIMEOUT, new ZclAttribute(ZclStandardClusterType.POLL_CONTROL, ATTR_FASTPOLLTIMEOUT, "FastPollTimeout", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
+        attributeMap.put(ATTR_CHECKININTERVALMIN, new ZclAttribute(ZclStandardClusterType.POLL_CONTROL, ATTR_CHECKININTERVALMIN, "CheckinIntervalMin", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_LONGPOLLINTERVALMIN, new ZclAttribute(ZclStandardClusterType.POLL_CONTROL, ATTR_LONGPOLLINTERVALMIN, "LongPollIntervalMin", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_FASTPOLLTIMEOUTMIN, new ZclAttribute(ZclStandardClusterType.POLL_CONTROL, ATTR_FASTPOLLTIMEOUTMIN, "FastPollTimeoutMin", ZclDataType.UNSIGNED_32_BIT_INTEGER, false, true, false, false));
 
         return attributeMap;
     }
@@ -393,7 +396,7 @@ public class ZclPollControlCluster extends ZclCluster {
      * Get the <i>FastPollTimeout</i> attribute [attribute ID <b>3</b>].
      * <p>
      * The FastPollTimeout attribute represents the number of quarterseconds that an end device will stay in fast poll mode by default. It is
-     * suggested that the FastPollTimeoutattribute value be greater than 7.68 seconds.The Poll Control Cluster  Client MAYoverride  this  value 
+     * suggested that the FastPollTimeoutattribute value be greater than 7.68 seconds.The Poll Control Cluster  Client MAYoverride  this  value
      * by  indicating  a  different  value  in  the  Fast  Poll Duration argument in the Check-in Response command. If the Client writes a value out of range
      * or greater  than  the  optional FastPollTimeoutMax attribute  value  if  supported, the Server SHOULD return a  Write  Attributes  Response with a
      * status of  INVALID_VALUE30.  An  end  device  that implements the  Poll Control server can be  put into a  fast poll  mode during  which it will send MAC
@@ -415,7 +418,7 @@ public class ZclPollControlCluster extends ZclCluster {
      * Synchronously get the <i>FastPollTimeout</i> attribute [attribute ID <b>3</b>].
      * <p>
      * The FastPollTimeout attribute represents the number of quarterseconds that an end device will stay in fast poll mode by default. It is
-     * suggested that the FastPollTimeoutattribute value be greater than 7.68 seconds.The Poll Control Cluster  Client MAYoverride  this  value 
+     * suggested that the FastPollTimeoutattribute value be greater than 7.68 seconds.The Poll Control Cluster  Client MAYoverride  this  value
      * by  indicating  a  different  value  in  the  Fast  Poll Duration argument in the Check-in Response command. If the Client writes a value out of range
      * or greater  than  the  optional FastPollTimeoutMax attribute  value  if  supported, the Server SHOULD return a  Write  Attributes  Response with a
      * status of  INVALID_VALUE30.  An  end  device  that implements the  Poll Control server can be  put into a  fast poll  mode during  which it will send MAC
@@ -449,7 +452,7 @@ public class ZclPollControlCluster extends ZclCluster {
      * Set reporting for the <i>FastPollTimeout</i> attribute [attribute ID <b>3</b>].
      * <p>
      * The FastPollTimeout attribute represents the number of quarterseconds that an end device will stay in fast poll mode by default. It is
-     * suggested that the FastPollTimeoutattribute value be greater than 7.68 seconds.The Poll Control Cluster  Client MAYoverride  this  value 
+     * suggested that the FastPollTimeoutattribute value be greater than 7.68 seconds.The Poll Control Cluster  Client MAYoverride  this  value
      * by  indicating  a  different  value  in  the  Fast  Poll Duration argument in the Check-in Response command. If the Client writes a value out of range
      * or greater  than  the  optional FastPollTimeoutMax attribute  value  if  supported, the Server SHOULD return a  Write  Attributes  Response with a
      * status of  INVALID_VALUE30.  An  end  device  that implements the  Poll Control server can be  put into a  fast poll  mode during  which it will send MAC
@@ -478,7 +481,7 @@ public class ZclPollControlCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @return the {@link Future<CommandResult>} command result future
      */
@@ -501,7 +504,7 @@ public class ZclPollControlCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
      * @return the {@link Integer} attribute value, or null on error
@@ -517,12 +520,12 @@ public class ZclPollControlCluster extends ZclCluster {
     /**
      * Get the <i>LongPollIntervalMin</i> attribute [attribute ID <b>5</b>].
      * <p>
-     * The Poll Control Server MAYoptionally provide its own minimum value for the LongPollIntervalto protect against  another  device  setting 
+     * The Poll Control Server MAYoptionally provide its own minimum value for the LongPollIntervalto protect against  another  device  setting
      * the  value  to  too  short  a  time  resulting  in  an  inadvertent  power  drain  on  the device.
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @return the {@link Future<CommandResult>} command result future
      */
@@ -533,7 +536,7 @@ public class ZclPollControlCluster extends ZclCluster {
     /**
      * Synchronously get the <i>LongPollIntervalMin</i> attribute [attribute ID <b>5</b>].
      * <p>
-     * The Poll Control Server MAYoptionally provide its own minimum value for the LongPollIntervalto protect against  another  device  setting 
+     * The Poll Control Server MAYoptionally provide its own minimum value for the LongPollIntervalto protect against  another  device  setting
      * the  value  to  too  short  a  time  resulting  in  an  inadvertent  power  drain  on  the device.
      * <p>
      * This method can return cached data if the attribute has already been received.
@@ -545,7 +548,7 @@ public class ZclPollControlCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
      * @return the {@link Integer} attribute value, or null on error
@@ -566,7 +569,7 @@ public class ZclPollControlCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @return the {@link Future<CommandResult>} command result future
      */
@@ -589,7 +592,7 @@ public class ZclPollControlCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
      * @return the {@link Integer} attribute value, or null on error

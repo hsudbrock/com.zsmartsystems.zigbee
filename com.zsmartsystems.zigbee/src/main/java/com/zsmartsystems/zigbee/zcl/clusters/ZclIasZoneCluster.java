@@ -7,6 +7,12 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+
+import javax.annotation.Generated;
+
 import com.zsmartsystems.zigbee.CommandResult;
 import com.zsmartsystems.zigbee.IeeeAddress;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
@@ -18,12 +24,8 @@ import com.zsmartsystems.zigbee.zcl.clusters.iaszone.InitiateTestModeCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.iaszone.ZoneEnrollRequestCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.iaszone.ZoneEnrollResponse;
 import com.zsmartsystems.zigbee.zcl.clusters.iaszone.ZoneStatusChangeNotificationCommand;
-import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-import javax.annotation.Generated;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
 
 /**
  * <b>IAS Zone</b> cluster implementation (<i>Cluster ID 0x0500</i>).
@@ -102,16 +104,17 @@ public class ZclIasZoneCluster extends ZclCluster {
     public static final int ATTR_CURRENTZONESENSITIVITYLEVEL = 0x0013;
 
     // Attribute initialisation
+    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(7);
 
-        attributeMap.put(ATTR_ZONESTATE, new ZclAttribute(ZclClusterType.IAS_ZONE, ATTR_ZONESTATE, "ZoneState", ZclDataType.ENUMERATION_8_BIT, true, true, false, false));
-        attributeMap.put(ATTR_ZONETYPE, new ZclAttribute(ZclClusterType.IAS_ZONE, ATTR_ZONETYPE, "ZoneType", ZclDataType.ENUMERATION_16_BIT, true, true, false, false));
-        attributeMap.put(ATTR_ZONESTATUS, new ZclAttribute(ZclClusterType.IAS_ZONE, ATTR_ZONESTATUS, "ZoneStatus", ZclDataType.BITMAP_16_BIT, true, true, false, false));
-        attributeMap.put(ATTR_IASCIEADDRESS, new ZclAttribute(ZclClusterType.IAS_ZONE, ATTR_IASCIEADDRESS, "IASCIEAddress", ZclDataType.IEEE_ADDRESS, true, true, true, false));
-        attributeMap.put(ATTR_ZONEID, new ZclAttribute(ZclClusterType.IAS_ZONE, ATTR_ZONEID, "ZoneID", ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, true, false));
-        attributeMap.put(ATTR_NUMBEROFZONESENSITIVITYLEVELSSUPPORTED, new ZclAttribute(ZclClusterType.IAS_ZONE, ATTR_NUMBEROFZONESENSITIVITYLEVELSSUPPORTED, "NumberOfZoneSensitivityLevelsSupported", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_CURRENTZONESENSITIVITYLEVEL, new ZclAttribute(ZclClusterType.IAS_ZONE, ATTR_CURRENTZONESENSITIVITYLEVEL, "CurrentZoneSensitivityLevel", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_ZONESTATE, new ZclAttribute(ZclStandardClusterType.IAS_ZONE, ATTR_ZONESTATE, "ZoneState", ZclDataType.ENUMERATION_8_BIT, true, true, false, false));
+        attributeMap.put(ATTR_ZONETYPE, new ZclAttribute(ZclStandardClusterType.IAS_ZONE, ATTR_ZONETYPE, "ZoneType", ZclDataType.ENUMERATION_16_BIT, true, true, false, false));
+        attributeMap.put(ATTR_ZONESTATUS, new ZclAttribute(ZclStandardClusterType.IAS_ZONE, ATTR_ZONESTATUS, "ZoneStatus", ZclDataType.BITMAP_16_BIT, true, true, false, false));
+        attributeMap.put(ATTR_IASCIEADDRESS, new ZclAttribute(ZclStandardClusterType.IAS_ZONE, ATTR_IASCIEADDRESS, "IASCIEAddress", ZclDataType.IEEE_ADDRESS, true, true, true, false));
+        attributeMap.put(ATTR_ZONEID, new ZclAttribute(ZclStandardClusterType.IAS_ZONE, ATTR_ZONEID, "ZoneID", ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, true, false));
+        attributeMap.put(ATTR_NUMBEROFZONESENSITIVITYLEVELSSUPPORTED, new ZclAttribute(ZclStandardClusterType.IAS_ZONE, ATTR_NUMBEROFZONESENSITIVITYLEVELSSUPPORTED, "NumberOfZoneSensitivityLevelsSupported", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_CURRENTZONESENSITIVITYLEVEL, new ZclAttribute(ZclStandardClusterType.IAS_ZONE, ATTR_CURRENTZONESENSITIVITYLEVEL, "CurrentZoneSensitivityLevel", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
 
         return attributeMap;
     }

@@ -7,6 +7,12 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+
+import javax.annotation.Generated;
+
 import com.zsmartsystems.zigbee.CommandResult;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.zcl.ZclAttribute;
@@ -20,12 +26,8 @@ import com.zsmartsystems.zigbee.zcl.clusters.levelcontrol.StepCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.levelcontrol.StepWithOnOffCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.levelcontrol.Stop2Command;
 import com.zsmartsystems.zigbee.zcl.clusters.levelcontrol.StopCommand;
-import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-import javax.annotation.Generated;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
 
 /**
  * <b>Level Control</b> cluster implementation (<i>Cluster ID 0x0008</i>).
@@ -96,16 +98,17 @@ public class ZclLevelControlCluster extends ZclCluster {
     public static final int ATTR_DEFAULTMOVERATE = 0x0014;
 
     // Attribute initialisation
+    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(7);
 
-        attributeMap.put(ATTR_CURRENTLEVEL, new ZclAttribute(ZclClusterType.LEVEL_CONTROL, ATTR_CURRENTLEVEL, "CurrentLevel", ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, false, true));
-        attributeMap.put(ATTR_REMAININGTIME, new ZclAttribute(ZclClusterType.LEVEL_CONTROL, ATTR_REMAININGTIME, "RemainingTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_ONOFFTRANSITIONTIME, new ZclAttribute(ZclClusterType.LEVEL_CONTROL, ATTR_ONOFFTRANSITIONTIME, "OnOffTransitionTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
-        attributeMap.put(ATTR_ONLEVEL, new ZclAttribute(ZclClusterType.LEVEL_CONTROL, ATTR_ONLEVEL, "OnLevel", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
-        attributeMap.put(ATTR_ONTRANSITIONTIME, new ZclAttribute(ZclClusterType.LEVEL_CONTROL, ATTR_ONTRANSITIONTIME, "OnTransitionTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
-        attributeMap.put(ATTR_OFFTRANSITIONTIME, new ZclAttribute(ZclClusterType.LEVEL_CONTROL, ATTR_OFFTRANSITIONTIME, "OffTransitionTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
-        attributeMap.put(ATTR_DEFAULTMOVERATE, new ZclAttribute(ZclClusterType.LEVEL_CONTROL, ATTR_DEFAULTMOVERATE, "DefaultMoveRate", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_CURRENTLEVEL, new ZclAttribute(ZclStandardClusterType.LEVEL_CONTROL, ATTR_CURRENTLEVEL, "CurrentLevel", ZclDataType.UNSIGNED_8_BIT_INTEGER, true, true, false, true));
+        attributeMap.put(ATTR_REMAININGTIME, new ZclAttribute(ZclStandardClusterType.LEVEL_CONTROL, ATTR_REMAININGTIME, "RemainingTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ONOFFTRANSITIONTIME, new ZclAttribute(ZclStandardClusterType.LEVEL_CONTROL, ATTR_ONOFFTRANSITIONTIME, "OnOffTransitionTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_ONLEVEL, new ZclAttribute(ZclStandardClusterType.LEVEL_CONTROL, ATTR_ONLEVEL, "OnLevel", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_ONTRANSITIONTIME, new ZclAttribute(ZclStandardClusterType.LEVEL_CONTROL, ATTR_ONTRANSITIONTIME, "OnTransitionTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_OFFTRANSITIONTIME, new ZclAttribute(ZclStandardClusterType.LEVEL_CONTROL, ATTR_OFFTRANSITIONTIME, "OffTransitionTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_DEFAULTMOVERATE, new ZclAttribute(ZclStandardClusterType.LEVEL_CONTROL, ATTR_DEFAULTMOVERATE, "DefaultMoveRate", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
 
         return attributeMap;
     }

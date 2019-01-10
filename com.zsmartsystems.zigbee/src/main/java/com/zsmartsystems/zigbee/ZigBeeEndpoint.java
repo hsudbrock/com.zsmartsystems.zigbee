@@ -89,7 +89,7 @@ public class ZigBeeEndpoint {
     /**
      * Constructor
      *
-     * @param node the parent {@link ZigBeeNode}
+     * @param node     the parent {@link ZigBeeNode}
      * @param endpoint the endpoint number within the {@link ZigBeeNode}
      */
     public ZigBeeEndpoint(ZigBeeNode node, int endpoint) {
@@ -157,7 +157,7 @@ public class ZigBeeEndpoint {
      *
      * @deprecated Use {@link #getInputCluster}
      * @param clusterId
-     *            the cluster number
+     *                      the cluster number
      * @return the cluster or null if cluster is not found
      */
     @Deprecated
@@ -189,7 +189,7 @@ public class ZigBeeEndpoint {
      * Sets input cluster IDs.
      *
      * @param inputClusterIds
-     *            the input cluster IDs
+     *                            the input cluster IDs
      */
     public void setInputClusterIds(List<Integer> inputClusterIds) {
         this.inputClusters.clear();
@@ -231,7 +231,7 @@ public class ZigBeeEndpoint {
      * Sets output cluster IDs.
      *
      * @param outputClusterIds
-     *            the output cluster IDs
+     *                             the output cluster IDs
      */
     public void setOutputClusterIds(List<Integer> outputClusterIds) {
         this.outputClusters.clear();
@@ -492,7 +492,7 @@ public class ZigBeeEndpoint {
     /**
      * Sends {@link ZigBeeCommand} command and uses the {@link ZigBeeTransactionMatcher} to match the response.
      *
-     * @param command the {@link ZigBeeCommand} to send
+     * @param command         the {@link ZigBeeCommand} to send
      * @param responseMatcher the {@link ZigBeeTransactionMatcher} used to match the response to the request
      * @return the {@link CommandResult} future.
      */

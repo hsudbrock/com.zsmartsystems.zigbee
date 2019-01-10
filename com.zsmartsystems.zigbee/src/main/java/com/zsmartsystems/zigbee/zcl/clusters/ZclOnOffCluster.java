@@ -7,6 +7,12 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+
+import javax.annotation.Generated;
+
 import com.zsmartsystems.zigbee.CommandResult;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.zcl.ZclAttribute;
@@ -18,12 +24,8 @@ import com.zsmartsystems.zigbee.zcl.clusters.onoff.OnCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.onoff.OnWithRecallGlobalSceneCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.onoff.OnWithTimedOffCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.onoff.ToggleCommand;
-import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-import javax.annotation.Generated;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
 
 /**
  * <b>On/Off</b> cluster implementation (<i>Cluster ID 0x0006</i>).
@@ -74,13 +76,14 @@ public class ZclOnOffCluster extends ZclCluster {
     public static final int ATTR_OFFWAITTIME = 0x4002;
 
     // Attribute initialisation
+    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(4);
 
-        attributeMap.put(ATTR_ONOFF, new ZclAttribute(ZclClusterType.ON_OFF, ATTR_ONOFF, "OnOff", ZclDataType.BOOLEAN, true, true, false, true));
-        attributeMap.put(ATTR_GLOBALSCENECONTROL, new ZclAttribute(ZclClusterType.ON_OFF, ATTR_GLOBALSCENECONTROL, "GlobalSceneControl", ZclDataType.BOOLEAN, false, true, false, false));
-        attributeMap.put(ATTR_OFFTIME, new ZclAttribute(ZclClusterType.ON_OFF, ATTR_OFFTIME, "OffTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
-        attributeMap.put(ATTR_OFFWAITTIME, new ZclAttribute(ZclClusterType.ON_OFF, ATTR_OFFWAITTIME, "OffWaitTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_ONOFF, new ZclAttribute(ZclStandardClusterType.ON_OFF, ATTR_ONOFF, "OnOff", ZclDataType.BOOLEAN, true, true, false, true));
+        attributeMap.put(ATTR_GLOBALSCENECONTROL, new ZclAttribute(ZclStandardClusterType.ON_OFF, ATTR_GLOBALSCENECONTROL, "GlobalSceneControl", ZclDataType.BOOLEAN, false, true, false, false));
+        attributeMap.put(ATTR_OFFTIME, new ZclAttribute(ZclStandardClusterType.ON_OFF, ATTR_OFFTIME, "OffTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
+        attributeMap.put(ATTR_OFFWAITTIME, new ZclAttribute(ZclStandardClusterType.ON_OFF, ATTR_OFFWAITTIME, "OffWaitTime", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, true, false));
 
         return attributeMap;
     }
@@ -170,7 +173,7 @@ public class ZclOnOffCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Boolean}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @return the {@link Future<CommandResult>} command result future
      */
@@ -202,7 +205,7 @@ public class ZclOnOffCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Boolean}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
      * @return the {@link Boolean} attribute value, or null on error
@@ -220,7 +223,7 @@ public class ZclOnOffCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @param offTime the {@link Integer} attribute value to be set
      * @return the {@link Future<CommandResult>} command result future
@@ -234,7 +237,7 @@ public class ZclOnOffCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @return the {@link Future<CommandResult>} command result future
      */
@@ -254,7 +257,7 @@ public class ZclOnOffCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
      * @return the {@link Integer} attribute value, or null on error
@@ -276,7 +279,7 @@ public class ZclOnOffCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @param offWaitTime the {@link Integer} attribute value to be set
      * @return the {@link Future<CommandResult>} command result future
@@ -294,7 +297,7 @@ public class ZclOnOffCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @return the {@link Future<CommandResult>} command result future
      */
@@ -318,7 +321,7 @@ public class ZclOnOffCluster extends ZclCluster {
      * <p>
      * The attribute is of type {@link Integer}.
      * <p>
-     * The implementation of this attribute by a device is 
+     * The implementation of this attribute by a device is
      *
      * @param refreshPeriod the maximum age of the data (in milliseconds) before an update is needed
      * @return the {@link Integer} attribute value, or null on error

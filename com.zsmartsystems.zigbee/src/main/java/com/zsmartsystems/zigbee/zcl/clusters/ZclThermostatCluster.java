@@ -7,6 +7,12 @@
  */
 package com.zsmartsystems.zigbee.zcl.clusters;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
+
+import javax.annotation.Generated;
+
 import com.zsmartsystems.zigbee.CommandResult;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.zcl.ZclAttribute;
@@ -19,12 +25,8 @@ import com.zsmartsystems.zigbee.zcl.clusters.thermostat.GetWeeklySchedule;
 import com.zsmartsystems.zigbee.zcl.clusters.thermostat.GetWeeklyScheduleResponse;
 import com.zsmartsystems.zigbee.zcl.clusters.thermostat.SetWeeklySchedule;
 import com.zsmartsystems.zigbee.zcl.clusters.thermostat.SetpointRaiseLowerCommand;
-import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
-import javax.annotation.Generated;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
 
 /**
  * <b>Thermostat</b> cluster implementation (<i>Cluster ID 0x0201</i>).
@@ -143,35 +145,81 @@ public class ZclThermostatCluster extends ZclCluster {
     public static final int ATTR_ACERRORCODE = 0x0044;
 
     // Attribute initialisation
+    @Override
     protected Map<Integer, ZclAttribute> initializeAttributes() {
         Map<Integer, ZclAttribute> attributeMap = new ConcurrentHashMap<Integer, ZclAttribute>(26);
 
-        attributeMap.put(ATTR_LOCALTEMPERATURE, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_LOCALTEMPERATURE, "LocalTemperature", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
-        attributeMap.put(ATTR_OUTDOORTEMPERATURE, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_OUTDOORTEMPERATURE, "OutdoorTemperature", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_OCCUPANCY, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_OCCUPANCY, "Occupancy", ZclDataType.BITMAP_8_BIT, false, true, false, false));
-        attributeMap.put(ATTR_ABSMINHEATSETPOINTLIMIT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_ABSMINHEATSETPOINTLIMIT, "AbsMinHeatSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_ABSMAXHEATSETPOINTLIMIT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_ABSMAXHEATSETPOINTLIMIT, "AbsMaxHeatSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_ABSMINCOOLSETPOINTLIMIT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_ABSMINCOOLSETPOINTLIMIT, "AbsMinCoolSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_ABSMAXCOOLSETPOINTLIMIT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_ABSMAXCOOLSETPOINTLIMIT, "AbsMaxCoolSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_PICOOLINGDEMAND, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_PICOOLINGDEMAND, "PICoolingDemand", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, true));
-        attributeMap.put(ATTR_PIHEATINGDEMAND, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_PIHEATINGDEMAND, "PIHeatingDemand", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, true));
-        attributeMap.put(ATTR_HVACSYSTEMTYPECONFIGURATION, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_HVACSYSTEMTYPECONFIGURATION, "HVACSystemTypeConfiguration", ZclDataType.BITMAP_8_BIT, false, true, false, false));
-        attributeMap.put(ATTR_LOCALTEMPERATURECALIBRATION, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_LOCALTEMPERATURECALIBRATION, "LocalTemperatureCalibration", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_OCCUPIEDCOOLINGSETPOINT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_OCCUPIEDCOOLINGSETPOINT, "OccupiedCoolingSetpoint", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
-        attributeMap.put(ATTR_OCCUPIEDHEATINGSETPOINT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_OCCUPIEDHEATINGSETPOINT, "OccupiedHeatingSetpoint", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
-        attributeMap.put(ATTR_UNOCCUPIEDCOOLINGSETPOINT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_UNOCCUPIEDCOOLINGSETPOINT, "UnoccupiedCoolingSetpoint", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_UNOCCUPIEDHEATINGSETPOINT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_UNOCCUPIEDHEATINGSETPOINT, "UnoccupiedHeatingSetpoint", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_MINHEATSETPOINTLIMIT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_MINHEATSETPOINTLIMIT, "MinHeatSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_MAXHEATSETPOINTLIMIT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_MAXHEATSETPOINTLIMIT, "MaxHeatSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_MINCOOLSETPOINTLIMIT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_MINCOOLSETPOINTLIMIT, "MinCoolSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_MAXCOOLSETPOINTLIMIT, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_MAXCOOLSETPOINTLIMIT, "MaxCoolSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_MINSETPOINTDEADBAND, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_MINSETPOINTDEADBAND, "MinSetpointDeadBand", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
-        attributeMap.put(ATTR_REMOTESENSING, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_REMOTESENSING, "RemoteSensing", ZclDataType.BITMAP_8_BIT, false, true, false, false));
-        attributeMap.put(ATTR_CONTROLSEQUENCEOFOPERATION, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_CONTROLSEQUENCEOFOPERATION, "ControlSequenceOfOperation", ZclDataType.ENUMERATION_8_BIT, true, true, false, false));
-        attributeMap.put(ATTR_SYSTEMMODE, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_SYSTEMMODE, "SystemMode", ZclDataType.ENUMERATION_8_BIT, true, true, false, false));
-        attributeMap.put(ATTR_ALARMMASK, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_ALARMMASK, "AlarmMask", ZclDataType.ENUMERATION_8_BIT, false, true, false, false));
-        attributeMap.put(ATTR_THERMOSTATRUNNINGMODE, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_THERMOSTATRUNNINGMODE, "ThermostatRunningMode", ZclDataType.ENUMERATION_8_BIT, false, true, false, false));
-        attributeMap.put(ATTR_ACERRORCODE, new ZclAttribute(ZclClusterType.THERMOSTAT, ATTR_ACERRORCODE, "ACErrorCode", ZclDataType.BITMAP_32_BIT, false, true, false, false));
+        attributeMap.put(ATTR_LOCALTEMPERATURE,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_LOCALTEMPERATURE, "LocalTemperature",
+                        ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, true));
+        attributeMap.put(ATTR_OUTDOORTEMPERATURE,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_OUTDOORTEMPERATURE, "OutdoorTemperature",
+                        ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_OCCUPANCY, new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_OCCUPANCY,
+                "Occupancy", ZclDataType.BITMAP_8_BIT, false, true, false, false));
+        attributeMap.put(ATTR_ABSMINHEATSETPOINTLIMIT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_ABSMINHEATSETPOINTLIMIT,
+                        "AbsMinHeatSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ABSMAXHEATSETPOINTLIMIT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_ABSMAXHEATSETPOINTLIMIT,
+                        "AbsMaxHeatSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ABSMINCOOLSETPOINTLIMIT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_ABSMINCOOLSETPOINTLIMIT,
+                        "AbsMinCoolSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_ABSMAXCOOLSETPOINTLIMIT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_ABSMAXCOOLSETPOINTLIMIT,
+                        "AbsMaxCoolSetpointLimit", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_PICOOLINGDEMAND, new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_PICOOLINGDEMAND,
+                "PICoolingDemand", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, true));
+        attributeMap.put(ATTR_PIHEATINGDEMAND, new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_PIHEATINGDEMAND,
+                "PIHeatingDemand", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, true));
+        attributeMap.put(ATTR_HVACSYSTEMTYPECONFIGURATION,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_HVACSYSTEMTYPECONFIGURATION,
+                        "HVACSystemTypeConfiguration", ZclDataType.BITMAP_8_BIT, false, true, false, false));
+        attributeMap.put(ATTR_LOCALTEMPERATURECALIBRATION,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_LOCALTEMPERATURECALIBRATION,
+                        "LocalTemperatureCalibration", ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_OCCUPIEDCOOLINGSETPOINT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_OCCUPIEDCOOLINGSETPOINT,
+                        "OccupiedCoolingSetpoint", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+        attributeMap.put(ATTR_OCCUPIEDHEATINGSETPOINT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_OCCUPIEDHEATINGSETPOINT,
+                        "OccupiedHeatingSetpoint", ZclDataType.UNSIGNED_16_BIT_INTEGER, true, true, false, false));
+        attributeMap.put(ATTR_UNOCCUPIEDCOOLINGSETPOINT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_UNOCCUPIEDCOOLINGSETPOINT,
+                        "UnoccupiedCoolingSetpoint", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_UNOCCUPIEDHEATINGSETPOINT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_UNOCCUPIEDHEATINGSETPOINT,
+                        "UnoccupiedHeatingSetpoint", ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_MINHEATSETPOINTLIMIT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_MINHEATSETPOINTLIMIT, "MinHeatSetpointLimit",
+                        ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_MAXHEATSETPOINTLIMIT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_MAXHEATSETPOINTLIMIT, "MaxHeatSetpointLimit",
+                        ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_MINCOOLSETPOINTLIMIT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_MINCOOLSETPOINTLIMIT, "MinCoolSetpointLimit",
+                        ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_MAXCOOLSETPOINTLIMIT,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_MAXCOOLSETPOINTLIMIT, "MaxCoolSetpointLimit",
+                        ZclDataType.UNSIGNED_16_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_MINSETPOINTDEADBAND,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_MINSETPOINTDEADBAND, "MinSetpointDeadBand",
+                        ZclDataType.UNSIGNED_8_BIT_INTEGER, false, true, false, false));
+        attributeMap.put(ATTR_REMOTESENSING, new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_REMOTESENSING,
+                "RemoteSensing", ZclDataType.BITMAP_8_BIT, false, true, false, false));
+        attributeMap.put(ATTR_CONTROLSEQUENCEOFOPERATION,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_CONTROLSEQUENCEOFOPERATION,
+                        "ControlSequenceOfOperation", ZclDataType.ENUMERATION_8_BIT, true, true, false, false));
+        attributeMap.put(ATTR_SYSTEMMODE, new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_SYSTEMMODE,
+                "SystemMode", ZclDataType.ENUMERATION_8_BIT, true, true, false, false));
+        attributeMap.put(ATTR_ALARMMASK, new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_ALARMMASK,
+                "AlarmMask", ZclDataType.ENUMERATION_8_BIT, false, true, false, false));
+        attributeMap.put(ATTR_THERMOSTATRUNNINGMODE,
+                new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_THERMOSTATRUNNINGMODE, "ThermostatRunningMode",
+                        ZclDataType.ENUMERATION_8_BIT, false, true, false, false));
+        attributeMap.put(ATTR_ACERRORCODE, new ZclAttribute(ZclStandardClusterType.THERMOSTAT, ATTR_ACERRORCODE,
+                "ACErrorCode", ZclDataType.BITMAP_32_BIT, false, true, false, false));
 
         return attributeMap;
     }
