@@ -17,6 +17,7 @@ import com.zsmartsystems.zigbee.ZigBeeDeviceType;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.ZigBeeNetworkManager;
 import com.zsmartsystems.zigbee.ZigBeeNode;
+import com.zsmartsystems.zigbee.ZigBeeProfileTypeRegistry;
 
 /**
  * Lists the devices in the network
@@ -74,7 +75,7 @@ public class ZigBeeConsoleNodeListCommand extends ZigBeeConsoleAbstractCommand {
                 first = false;
                 ZigBeeEndpoint endpoint = node.getEndpoint(endpointId);
                 out.println(String.format("%-3d  %-25s  %s", endpoint.getEndpointId(),
-                        networkManager.getProfileTypeRegistry().getByProfileId(endpoint.getProfileId()),
+                        ZigBeeProfileTypeRegistry.getInstance().getByProfileId(endpoint.getProfileId()),
                         ZigBeeDeviceType.getByValue(endpoint.getDeviceId())));
             }
             if (first) {

@@ -7,6 +7,8 @@
  */
 package com.zsmartsystems.zigbee.zcl.protocol;
 
+import com.zsmartsystems.zigbee.zcl.ZclCluster;
+
 /**
  * A ZCL cluster type.
  *
@@ -18,5 +20,15 @@ public interface ZclClusterType {
      * @return the cluster identifier of the cluster.
      */
     int getId();
+
+    /**
+     * @return a label describing the cluster type
+     */
+    String getLabel();
+
+    /**
+     * @return the class implementing the cluster
+     */
+    Class<? extends ZclCluster> getClusterClass();
 
 }

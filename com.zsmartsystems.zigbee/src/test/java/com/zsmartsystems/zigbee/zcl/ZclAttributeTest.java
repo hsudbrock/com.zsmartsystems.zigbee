@@ -7,16 +7,14 @@
  */
 package com.zsmartsystems.zigbee.zcl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Calendar;
 
 import org.junit.Test;
 
-import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclStandardClusterType;
 
 /**
  *
@@ -26,10 +24,10 @@ import com.zsmartsystems.zigbee.zcl.protocol.ZclDataType;
 public class ZclAttributeTest {
     @Test
     public void testConstructor() {
-        ZclAttribute attribute = new ZclAttribute(ZclClusterType.ON_OFF, 0, "Test Name",
+        ZclAttribute attribute = new ZclAttribute(ZclStandardClusterType.ON_OFF, 0, "Test Name",
                 ZclDataType.UNSIGNED_8_BIT_INTEGER, false, false, false, false);
 
-        assertEquals(ZclClusterType.ON_OFF, attribute.getCluster());
+        assertEquals(ZclStandardClusterType.ON_OFF, attribute.getCluster());
         assertEquals(0, attribute.getId());
         assertEquals("Test Name", attribute.getName());
         assertEquals(ZclDataType.UNSIGNED_8_BIT_INTEGER, attribute.getDataType());
@@ -39,8 +37,8 @@ public class ZclAttributeTest {
         assertEquals(false, attribute.isReportable());
         System.out.println(attribute.toString());
 
-        attribute = new ZclAttribute(ZclClusterType.ON_OFF, 0, "Test Name", ZclDataType.UNSIGNED_8_BIT_INTEGER, true,
-                true, true, true);
+        attribute = new ZclAttribute(ZclStandardClusterType.ON_OFF, 0, "Test Name", ZclDataType.UNSIGNED_8_BIT_INTEGER,
+                true, true, true, true);
 
         assertEquals(true, attribute.isMandatory());
         assertEquals(true, attribute.isWritable());
@@ -51,7 +49,7 @@ public class ZclAttributeTest {
 
     @Test
     public void getLastReportTime() {
-        ZclAttribute attribute = new ZclAttribute(ZclClusterType.ON_OFF, 0, "Test Name",
+        ZclAttribute attribute = new ZclAttribute(ZclStandardClusterType.ON_OFF, 0, "Test Name",
                 ZclDataType.UNSIGNED_8_BIT_INTEGER, false, false, false, false);
 
         // No value has been set, so should always be false

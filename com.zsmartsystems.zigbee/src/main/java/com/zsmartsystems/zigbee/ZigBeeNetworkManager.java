@@ -238,16 +238,6 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
      */
     private int localNwkAddress = 0;
 
-    /**
-     * The registry for all profile types.
-     */
-    private ZigBeeProfileTypeRegistry profileTypeRegistry;
-
-    /**
-     * The registry for all cluster types.
-     */
-    private ZclClusterTypeRegistry clusterTypeRegistry;
-
     public enum ZigBeeInitializeResponse {
         /**
          * Device is initialized successfully and is currently joined to a network
@@ -286,9 +276,6 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
         transport.setZigBeeTransportReceive(this);
 
         transactionManager = new ZigBeeTransactionManager(this);
-
-        profileTypeRegistry = new ZigBeeProfileTypeRegistry();
-        clusterTypeRegistry = new ZclClusterTypeRegistry();
     }
 
     /**
@@ -1488,13 +1475,5 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
     @Override
     public void receiveCommandStatus(int transactionId, ZigBeeTransportProgressState status) {
         transactionManager.receiveCommandStatus(transactionId, status);
-    }
-
-    public ZigBeeProfileTypeRegistry getProfileTypeRegistry() {
-        return profileTypeRegistry;
-    }
-
-    public ZclClusterTypeRegistry getClusterTypeRegistry() {
-        return clusterTypeRegistry;
     }
 }

@@ -20,7 +20,8 @@ public class StandardZigBeeProfileTypeTest {
 
     @Test
     public void testTypes() {
-        assertEquals(ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION, ZigBeeStandardProfileType.getByValue(0x0104));
-        assertEquals(ZigBeeStandardProfileType.ZIGBEE_LIGHT_LINK, ZigBeeStandardProfileType.getByValue(0xC05E));
+        assertEquals(ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION,
+                ZigBeeStandardProfileType.getProfileType(0x0104));
+        assertEquals(ZigBeeStandardProfileType.ZIGBEE_LIGHT_LINK, ZigBeeStandardProfileType.getProfileType(0xC05E));
     }
 }

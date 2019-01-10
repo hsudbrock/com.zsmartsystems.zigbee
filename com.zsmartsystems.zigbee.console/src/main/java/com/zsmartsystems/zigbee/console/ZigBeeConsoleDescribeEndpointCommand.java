@@ -16,6 +16,7 @@ import com.zsmartsystems.zigbee.ZigBeeDeviceType;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.ZigBeeNetworkManager;
 import com.zsmartsystems.zigbee.ZigBeeProfileType;
+import com.zsmartsystems.zigbee.ZigBeeProfileTypeRegistry;
 import com.zsmartsystems.zigbee.zcl.ZclAttribute;
 import com.zsmartsystems.zigbee.zcl.ZclCluster;
 
@@ -54,7 +55,7 @@ public class ZigBeeConsoleDescribeEndpointCommand extends ZigBeeConsoleAbstractC
 
         final ZigBeeEndpoint endpoint = getEndpoint(networkManager, args[1]);
 
-        ZigBeeProfileType profile = networkManager.getProfileTypeRegistry().getByProfileId(endpoint.getProfileId());
+        ZigBeeProfileType profile = ZigBeeProfileTypeRegistry.getInstance().getByProfileId(endpoint.getProfileId());
         ZigBeeDeviceType device = ZigBeeDeviceType.getByValue(endpoint.getDeviceId());
 
         out.println("IEEE Address     : " + endpoint.getIeeeAddress());

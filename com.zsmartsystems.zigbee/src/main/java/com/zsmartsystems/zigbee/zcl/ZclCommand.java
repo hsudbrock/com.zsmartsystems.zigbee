@@ -8,7 +8,7 @@
 package com.zsmartsystems.zigbee.zcl;
 
 import com.zsmartsystems.zigbee.ZigBeeCommand;
-import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterTypeRegistry;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclCommandDirection;
 
 /**
@@ -90,7 +90,7 @@ public abstract class ZclCommand extends ZigBeeCommand {
     public String toString() {
         Integer resolvedClusterId = getClusterId();
         final StringBuilder builder = new StringBuilder();
-        builder.append(ZclClusterType.getValueById(resolvedClusterId).getLabel());
+        builder.append(ZclClusterTypeRegistry.getInstance().getByClusterId(resolvedClusterId).getLabel());
         builder.append(": ");
         builder.append(super.toString());
         return builder.toString();

@@ -28,6 +28,7 @@ import com.zsmartsystems.zigbee.zcl.ZclCommand;
 import com.zsmartsystems.zigbee.zcl.clusters.general.ReadAttributesResponse;
 import com.zsmartsystems.zigbee.zcl.clusters.general.ReportAttributesCommand;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterType;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterTypeRegistry;
 import com.zsmartsystems.zigbee.zcl.protocol.ZclCommandDirection;
 
 /**
@@ -263,7 +264,7 @@ public class ZigBeeEndpoint {
     }
 
     private ZclCluster getClusterClass(int clusterId) {
-        ZclClusterType clusterType = ZclClusterType.getValueById(clusterId);
+        ZclClusterType clusterType = ZclClusterTypeRegistry.getInstance().getByClusterId(clusterId);
         if (clusterType == null) {
             // Unsupported cluster
             logger.debug("{}: Unsupported cluster {}", getEndpointAddress(), clusterId);
@@ -314,11 +315,11 @@ public class ZigBeeEndpoint {
 
                 if (isInput) {
                     logger.debug("{}: Setting cluster {} as server", getEndpointAddress(),
-                            ZclClusterType.getValueById(id));
+                            ZclClusterTypeRegistry.getInstance().getByClusterId(id));
                     clusterClass.setServer();
                 } else {
                     logger.debug("{}: Setting cluster {} as client", getEndpointAddress(),
-                            ZclClusterType.getValueById(id));
+                            ZclClusterTypeRegistry.getInstance().getByClusterId(id));
                     clusterClass.setClient();
                 }
 

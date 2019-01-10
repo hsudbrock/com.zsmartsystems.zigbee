@@ -17,6 +17,16 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ZclClusterTypeRegistry {
 
+    private ZclClusterTypeRegistry() {
+        // only private instantiation permitted
+    }
+
+    private static ZclClusterTypeRegistry instance = new ZclClusterTypeRegistry();
+
+    public static ZclClusterTypeRegistry getInstance() {
+        return instance;
+    }
+
     private Map<Integer, ZclClusterType> nonStandardClusterTypes = new ConcurrentHashMap<>();
 
     /**

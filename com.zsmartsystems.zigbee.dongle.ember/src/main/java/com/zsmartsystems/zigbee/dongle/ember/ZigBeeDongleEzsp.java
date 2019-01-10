@@ -23,13 +23,13 @@ import org.slf4j.LoggerFactory;
 
 import com.zsmartsystems.zigbee.ExtendedPanId;
 import com.zsmartsystems.zigbee.IeeeAddress;
-import com.zsmartsystems.zigbee.ZigBeeStandardProfileType;
 import com.zsmartsystems.zigbee.ZigBeeApsFrame;
 import com.zsmartsystems.zigbee.ZigBeeBroadcastDestination;
 import com.zsmartsystems.zigbee.ZigBeeChannel;
 import com.zsmartsystems.zigbee.ZigBeeChannelMask;
 import com.zsmartsystems.zigbee.ZigBeeNodeStatus;
 import com.zsmartsystems.zigbee.ZigBeeNwkAddressMode;
+import com.zsmartsystems.zigbee.ZigBeeStandardProfileType;
 import com.zsmartsystems.zigbee.ZigBeeStatus;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.EzspFrame;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspChildJoinHandler;
@@ -211,7 +211,7 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
      * Create a {@link ZigBeeDongleEzsp} with the default ASH frame handler
      *
      * @param serialPort the {@link ZigBeePort} to use for the connection
-     * @param protocol the {@link EmberSerialProtocol} to use
+     * @param protocol   the {@link EmberSerialProtocol} to use
      */
     public ZigBeeDongleEzsp(final ZigBeePort serialPort, final EmberSerialProtocol protocol) {
         this.serialPort = serialPort;
@@ -257,8 +257,9 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
      * Note that this must be called prior to {@link #initialize()} for the configuration to be effective.
      *
      * @param configId the {@link EzspConfigId} to be updated.
-     * @param value the value to set (as {@link Integer}. Setting this to null will remove the configuration Id from the
-     *            list of configuration to be sent during NCP initialisation.
+     * @param value    the value to set (as {@link Integer}. Setting this to null will remove the configuration Id from
+     *                     the
+     *                     list of configuration to be sent during NCP initialisation.
      * @return the previously configured value, or null if no value was set for the {@link EzspConfigId}
      */
     public Integer updateDefaultConfiguration(EzspConfigId configId, Integer value) {
@@ -274,8 +275,8 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
      * Note that this must be called prior to {@link #initialize()} for the configuration to be effective.
      *
      * @param configId the {@link EzspPolicyId} to be updated
-     * @param value the (as {@link EzspDecisionId} to set. Setting this to null will remove the policy from
-     *            the list of policies to be sent during NCP initialisation.
+     * @param value    the (as {@link EzspDecisionId} to set. Setting this to null will remove the policy from
+     *                     the list of policies to be sent during NCP initialisation.
      * @return the previously configured {@link EzspDecisionId}, or null if no value was set for the
      *         {@link EzspPolicyId}
      */
@@ -344,7 +345,7 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
         ncp.getNetworkParameters();
 
         // Add the endpoint
-        ncp.addEndpoint(1, 0, ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION.getKey(), new int[] { 0 },
+        ncp.addEndpoint(1, 0, ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION.getProfileId(), new int[] { 0 },
                 new int[] { 0 });
 
         // Now initialise the network

@@ -20,11 +20,11 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
 import com.zsmartsystems.zigbee.ExtendedPanId;
-import com.zsmartsystems.zigbee.ZigBeeStandardProfileType;
 import com.zsmartsystems.zigbee.TestUtilities;
 import com.zsmartsystems.zigbee.ZigBeeApsFrame;
 import com.zsmartsystems.zigbee.ZigBeeChannel;
 import com.zsmartsystems.zigbee.ZigBeeNwkAddressMode;
+import com.zsmartsystems.zigbee.ZigBeeStandardProfileType;
 import com.zsmartsystems.zigbee.ZigBeeStatus;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.EzspFrame;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.EzspFrameRequest;
@@ -228,7 +228,7 @@ public class ZigBeeDongleEzspTest {
 
         ZigBeeApsFrame apsFrame = new ZigBeeApsFrame();
         apsFrame.setCluster(0);
-        apsFrame.setProfile(ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION.getKey());
+        apsFrame.setProfile(ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION.getProfileId());
         apsFrame.setAddressMode(ZigBeeNwkAddressMode.DEVICE);
         apsFrame.setDestinationAddress(1234);
         apsFrame.setApsCounter(1);
@@ -252,7 +252,7 @@ public class ZigBeeDongleEzspTest {
 
         ZigBeeApsFrame apsFrame = new ZigBeeApsFrame();
         apsFrame.setCluster(0);
-        apsFrame.setProfile(ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION.getKey());
+        apsFrame.setProfile(ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION.getProfileId());
         apsFrame.setAddressMode(ZigBeeNwkAddressMode.DEVICE);
         apsFrame.setDestinationAddress(0xfff9);
         apsFrame.setApsCounter(1);

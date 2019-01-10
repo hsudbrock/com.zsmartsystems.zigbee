@@ -15,6 +15,8 @@ import java.util.List;
 import com.zsmartsystems.zigbee.ZigBeeEndpoint;
 import com.zsmartsystems.zigbee.ZigBeeNetworkManager;
 import com.zsmartsystems.zigbee.ZigBeeNode;
+import com.zsmartsystems.zigbee.ZigBeeProfileTypeRegistry;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterTypeRegistry;
 import com.zsmartsystems.zigbee.zdo.field.NeighborTable;
 import com.zsmartsystems.zigbee.zdo.field.RoutingTable;
 
@@ -68,7 +70,7 @@ public class ZigBeeConsoleDescribeNodeCommand extends ZigBeeConsoleAbstractComma
         for (Integer endpointId : endpointIds) {
             ZigBeeEndpoint endpoint = node.getEndpoint(endpointId);
             out.print(String.format("            %-3d  : ", endpoint.getEndpointId()));
-            outputEndpoint(out, endpoint, networkManager);
+            outputEndpoint(out, endpoint);
         }
         out.println("Neighbors:");
         for (NeighborTable neighbor : node.getNeighbors()) {
@@ -80,16 +82,16 @@ public class ZigBeeConsoleDescribeNodeCommand extends ZigBeeConsoleAbstractComma
         }
     }
 
-    private void outputEndpoint(PrintStream out, ZigBeeEndpoint endpoint, ZigBeeNetworkManager networkManager) {
+    private void outputEndpoint(PrintStream out, ZigBeeEndpoint endpoint) {
         out.println("Profile     " + String.format("%04X ", endpoint.getProfileId())
-                + networkManager.getProfileTypeRegistry().getByProfileId(endpoint.getProfileId()));
+                + ZigBeeProfileTypeRegistry.getInstance().getByProfileId(endpoint.getProfileId()));
         out.println("                 : Device Type " + String.format("%04X ", endpoint.getDeviceId())
                 + com.zsmartsystems.zigbee.ZigBeeDeviceType.getByValue(endpoint.getDeviceId()).toString());
         for (Integer clusterId : endpoint.getInputClusterIds()) {
-            out.println("                   -> " + networkManager.getClusterTypeRegistry().getByClusterId(clusterId));
+            out.println("                   -> " + ZclClusterTypeRegistry.getInstance().getByClusterId(clusterId));
         }
         for (Integer clusterId : endpoint.getOutputClusterIds()) {
-            out.println("                   <- " + networkManager.getClusterTypeRegistry().getByClusterId(clusterId));
+            out.println("                   <- " + ZclClusterTypeRegistry.getInstance().getByClusterId(clusterId));
         }
     }
 }

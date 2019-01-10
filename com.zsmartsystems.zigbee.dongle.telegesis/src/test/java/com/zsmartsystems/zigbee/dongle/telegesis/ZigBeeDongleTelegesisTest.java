@@ -18,11 +18,11 @@ import org.mockito.Mockito;
 
 import com.zsmartsystems.zigbee.ExtendedPanId;
 import com.zsmartsystems.zigbee.IeeeAddress;
-import com.zsmartsystems.zigbee.ZigBeeStandardProfileType;
 import com.zsmartsystems.zigbee.TestUtilities;
 import com.zsmartsystems.zigbee.ZigBeeApsFrame;
 import com.zsmartsystems.zigbee.ZigBeeNodeStatus;
 import com.zsmartsystems.zigbee.ZigBeeNwkAddressMode;
+import com.zsmartsystems.zigbee.ZigBeeStandardProfileType;
 import com.zsmartsystems.zigbee.dongle.telegesis.internal.TelegesisFrameHandler;
 import com.zsmartsystems.zigbee.dongle.telegesis.internal.protocol.TelegesisAckMessageEvent;
 import com.zsmartsystems.zigbee.dongle.telegesis.internal.protocol.TelegesisDeviceJoinedNetworkEvent;
@@ -216,7 +216,7 @@ public class ZigBeeDongleTelegesisTest {
 
         ZigBeeApsFrame apsFrame = new ZigBeeApsFrame();
         apsFrame.setCluster(0);
-        apsFrame.setProfile(ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION.getKey());
+        apsFrame.setProfile(ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION.getProfileId());
         apsFrame.setAddressMode(ZigBeeNwkAddressMode.DEVICE);
         apsFrame.setDestinationAddress(1234);
         apsFrame.setApsCounter(1);
@@ -237,7 +237,7 @@ public class ZigBeeDongleTelegesisTest {
 
         ZigBeeApsFrame apsFrame = new ZigBeeApsFrame();
         apsFrame.setCluster(0);
-        apsFrame.setProfile(ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION.getKey());
+        apsFrame.setProfile(ZigBeeStandardProfileType.ZIGBEE_HOME_AUTOMATION.getProfileId());
         apsFrame.setAddressMode(ZigBeeNwkAddressMode.DEVICE);
         apsFrame.setDestinationAddress(0xfff9);
         apsFrame.setApsCounter(1);

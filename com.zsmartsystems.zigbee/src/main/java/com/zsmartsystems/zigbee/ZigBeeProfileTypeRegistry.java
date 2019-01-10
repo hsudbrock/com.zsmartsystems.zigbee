@@ -17,6 +17,16 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ZigBeeProfileTypeRegistry {
 
+    private ZigBeeProfileTypeRegistry() {
+        // only private instantiation permitted
+    }
+
+    private static ZigBeeProfileTypeRegistry instance = new ZigBeeProfileTypeRegistry();
+
+    public static ZigBeeProfileTypeRegistry getInstance() {
+        return instance;
+    }
+
     private Map<Integer, ZigBeeProfileType> nonStandardProfileTypes = new ConcurrentHashMap<>();
 
     /**
@@ -42,7 +52,7 @@ public class ZigBeeProfileTypeRegistry {
     /**
      * Returns a {@link ZigBeeProfileType} with the given ID, if provided by either a non-standard profile type that has
      * been added to this registry, or if provided by the {@link ZigBeeStandardProfileType} enum.
-     * 
+     *
      * @param profileId The ID of the profile type.
      * @return The {@link ZigBeeProfileType}, or null if no profile type with the given ID is available.
      */
@@ -51,7 +61,7 @@ public class ZigBeeProfileTypeRegistry {
         if (zigBeeProfileType != null) {
             return zigBeeProfileType;
         } else {
-            return ZigBeeStandardProfileType.getByValue(profileId);
+            return ZigBeeStandardProfileType.getProfileType(profileId);
         }
     }
 

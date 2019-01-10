@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutionException;
 import com.zsmartsystems.zigbee.IeeeAddress;
 import com.zsmartsystems.zigbee.ZigBeeNetworkManager;
 import com.zsmartsystems.zigbee.ZigBeeNode;
+import com.zsmartsystems.zigbee.zcl.protocol.ZclClusterTypeRegistry;
 import com.zsmartsystems.zigbee.zdo.field.BindingTable;
 
 /**
@@ -71,7 +72,7 @@ public class ZigBeeConsoleBindingTableCommand extends ZigBeeConsoleAbstractComma
                                     : "",
                             entry.getDstAddrMode() == 1 ? Integer.toString(entry.getDstGroupAddr()) : "",
                             getAddressMode(entry.getDstAddrMode()), entry.getClusterId(),
-                            networkManager.getClusterTypeRegistry().getByClusterId(entry.getClusterId())));
+                            ZclClusterTypeRegistry.getInstance().getByClusterId(entry.getClusterId())));
         }
     }
 
