@@ -52,6 +52,7 @@ import com.zsmartsystems.zigbee.dongle.cc2531.ZigBeeDongleTiCc2531;
 import com.zsmartsystems.zigbee.dongle.conbee.ZigBeeDongleConBee;
 import com.zsmartsystems.zigbee.dongle.ember.ZigBeeDongleEzsp;
 import com.zsmartsystems.zigbee.dongle.telegesis.ZigBeeDongleTelegesis;
+import com.zsmartsystems.zigbee.dongle.virtual.ZigBeeDongleVirtual;
 import com.zsmartsystems.zigbee.dongle.xbee.ZigBeeDongleXBee;
 import com.zsmartsystems.zigbee.security.ZigBeeKey;
 import com.zsmartsystems.zigbee.serial.ZigBeeSerialPort;
@@ -116,7 +117,7 @@ public class ZigBeeConsoleMain {
 
         Options options = new Options();
         options.addOption(Option.builder("d").longOpt("dongle").hasArg().argName("dongle type")
-                .desc("Set the dongle type to use (EMBER | CC2531 | TELEGESIS | CONBEE | XBEE)").required().build());
+                .desc("Set the dongle type to use (EMBER | CC2531 | TELEGESIS | CONBEE | XBEE | VIRTUAL)").required().build());
         options.addOption(Option.builder("p").longOpt("port").argName("port name").hasArg().desc("Set the port")
                 .required().build());
         options.addOption(
@@ -261,6 +262,8 @@ public class ZigBeeConsoleMain {
             transportOptions.addOption(TransportConfigOption.SUPPORTED_OUTPUT_CLUSTERS, clusters);
 
             commands.add(TelegesisConsoleSecurityStateCommand.class);
+        } else if (dongleName.toUpperCase().contentEquals("VIRTUAL")) {
+           dongle = new ZigBeeDongleVirtual();
         } else {
             dongle = null;
         }
